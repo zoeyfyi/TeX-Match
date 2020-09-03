@@ -1,12 +1,13 @@
 #[macro_use]
 extern crate shrinkwraprs;
 
-use detexify::{point::Point, Classifier, Stroke, StrokeSample};
+use detexify::{point::Point, Classifier, Stroke, StrokeSample, Symbol};
 use gio::prelude::*;
 use gladis::Gladis;
 use glib::Type;
 use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
 use itertools::Itertools;
+use log::warn;
 use std::{
     iter,
     sync::{Arc, RwLock},
@@ -28,12 +29,11 @@ struct DrawState {
     is_down: bool,
     classifier: Classifier,
 }
-const ID_COLUMN: u32 = 0;
-const SCORE_COLUMN: u32 = 1;
-const ICON_COLUMN: u32 = 2;
+const ICON_COLUMN: u32 = 0;
+const TEXT_COLUMN: u32 = 1;
 
-const COLUMNS: [u32; 3] = [ID_COLUMN, SCORE_COLUMN, ICON_COLUMN];
-const COLUMN_TYPES: [Type; 3] = [Type::String, Type::F64, Type::String];
+const COLUMNS: [u32; 2] = [ICON_COLUMN, TEXT_COLUMN];
+const COLUMN_TYPES: [Type; 2] = [Type::String, Type::String];
 
 fn main() {
     env_logger::init();
@@ -62,15 +62,10 @@ fn main() {
 
             app.tree_view.set_model(Some(&store));
 
-            store.set_sort_column_id(
-                gtk::SortColumn::Index(SCORE_COLUMN),
-                gtk::SortType::Ascending,
-            );
-
             // icon column
             {
                 let renderer = gtk::CellRendererPixbuf::new();
-                // renderer.set_padding(ICON_COLUMN_PADDING, ICON_COLUMN_PADDING);
+                renderer.set_padding(8, 16);
                 renderer.set_property_stock_size(gtk::IconSize::Dnd);
 
                 let column = gtk::TreeViewColumn::new();
@@ -86,18 +81,7 @@ fn main() {
                 let column = gtk::TreeViewColumn::new();
                 column.pack_start(&renderer, true);
                 column.set_sizing(gtk::TreeViewColumnSizing::Autosize);
-                column.add_attribute(&renderer, "markup", ID_COLUMN as i32);
-
-                app.tree_view.append_column(&column);
-            }
-
-            {
-                let renderer = gtk::CellRendererText::new();
-
-                let column = gtk::TreeViewColumn::new();
-                column.pack_start(&renderer, true);
-                column.set_sizing(gtk::TreeViewColumnSizing::Autosize);
-                column.add_attribute(&renderer, "markup", SCORE_COLUMN as i32);
+                column.add_attribute(&renderer, "markup", TEXT_COLUMN as i32);
 
                 app.tree_view.append_column(&column);
             }
@@ -132,23 +116,50 @@ fn main() {
                     draw_state.strokes.push(new_stroke);
                     draw_state.current_stroke = Stroke::default();
 
-                    let sample = StrokeSample::new(draw_state.strokes.clone());
-                    let results = draw_state.classifier.classify(sample);
+                    if let Some( sample) = StrokeSample::new(draw_state.strokes.clone()) {
+                        if let Some(results) = draw_state.classifier.classify(sample) {
+                            let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
+        
+                            store.clear();
+        
+                            for result in results.iter() {
+                                let id =
+                                    String::from_utf8(base64::decode(result.id.clone()).unwrap()).unwrap();
+        
+                                if let Some(symbol) = Symbol::from_id(&result.id) {
+        
+                                    let mode = match (symbol.text_mode, symbol.math_mode) {
+                                        (true, true) => "textmode & mathmode",
+                                        (true, false) => "textmode",
+                                        (false, true) => "mathmode",
+                                        (false, false) => "",
+                                    };
 
-                    let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
-
-                    store.clear();
-
-                    for result in results.iter() {
-                        let id =
-                            String::from_utf8(base64::decode(result.id.clone()).unwrap()).unwrap();
-
-                        let s = format!("{}\n{}", id, result.id);
-
-                        let icon = format!("{}-symbolic", result.id);
-
-                        store.set(&store.append(), &COLUMNS, &[&s, &result.score, &icon]);
-                        // println!("{:?}", result);
+                                    let s = if symbol.package != "latex2e" {
+                                        format!(
+                                            "<span size=\"smaller\">\\usepackage{{ {} }}</span>\n<b>{}</b>\n<span size=\"x-small\">{} (score: {:.4})</span>", 
+                                            symbol.package, 
+                                            symbol.command, 
+                                            mode,
+                                            result.score, 
+                                        )
+                                    } else {
+                                        format!(
+                                            "<b>{}</b>\n<span size=\"x-small\">{} (score: {:.4})</span>", 
+                                            symbol.command, 
+                                            mode,
+                                            result.score, 
+                                        )
+                                    };
+        
+                                    let icon = format!("{}-symbolic", result.id);
+        
+                                    store.set(&store.append(), &COLUMNS, &[&icon, &s]);
+                                } else {
+                                    warn!("cannot find symbol for {}", id);
+                                }
+                            }
+                        }
                     }
 
                     Inhibit(false)
