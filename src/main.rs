@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate shrinkwraprs;
 
-use detexify::{Classifier, StrokeSample};
+use detexify::{point::Point, Classifier, Stroke, StrokeSample};
 use gio::prelude::*;
 use gladis::Gladis;
 use glib::Type;
@@ -23,16 +23,17 @@ struct App {
 
 #[derive(Default)]
 struct DrawState {
-    strokes: Vec<Vec<(f64, f64)>>,
-    current_stroke: Vec<(f64, f64)>,
+    strokes: Vec<Stroke>,
+    current_stroke: Stroke,
     is_down: bool,
     classifier: Classifier,
 }
 const ID_COLUMN: u32 = 0;
 const SCORE_COLUMN: u32 = 1;
+const ICON_COLUMN: u32 = 2;
 
-const COLUMNS: [u32; 2] = [ID_COLUMN, SCORE_COLUMN];
-const COLUMN_TYPES: [Type; 2] = [Type::String, Type::F64];
+const COLUMNS: [u32; 3] = [ID_COLUMN, SCORE_COLUMN, ICON_COLUMN];
+const COLUMN_TYPES: [Type; 3] = [Type::String, Type::F64, Type::String];
 
 fn main() {
     env_logger::init();
@@ -48,6 +49,10 @@ fn main() {
         let resource_data = glib::Bytes::from(&resource_bytes[..]);
         gio::resources_register(&gio::Resource::from_data(&resource_data).unwrap());
 
+        // add embedeed icons to theme
+        let icon_theme = gtk::IconTheme::get_default().expect("failed to get default icon theme");
+        icon_theme.add_resource_path("/uk/co/mrbenshef/TeX-Match/icons");
+
         let app: App = App::from_resource("/uk/co/mrbenshef/TeX-Match/app.glade")
             .unwrap_or_else(|e| panic!("failed to load app.glade: {}", e));
         app.set_application(Some(application));
@@ -61,6 +66,19 @@ fn main() {
                 gtk::SortColumn::Index(SCORE_COLUMN),
                 gtk::SortType::Ascending,
             );
+
+            // icon column
+            {
+                let renderer = gtk::CellRendererPixbuf::new();
+                // renderer.set_padding(ICON_COLUMN_PADDING, ICON_COLUMN_PADDING);
+                renderer.set_property_stock_size(gtk::IconSize::Dnd);
+
+                let column = gtk::TreeViewColumn::new();
+                column.pack_start(&renderer, false);
+                column.add_attribute(&renderer, "icon-name", ICON_COLUMN as i32);
+
+                app.tree_view.append_column(&column);
+            }
 
             {
                 let renderer = gtk::CellRendererText::new();
@@ -82,20 +100,6 @@ fn main() {
                 column.add_attribute(&renderer, "markup", SCORE_COLUMN as i32);
 
                 app.tree_view.append_column(&column);
-            }
-
-            for (id, score) in &[
-                ("foo".to_string(), 0.0),
-                ("bar".to_string(), 1.0),
-                ("baz".to_string(), 2.0),
-                ("foo".to_string(), 0.0),
-                ("bar".to_string(), 1.0),
-                ("baz".to_string(), 2.0),
-                ("foo".to_string(), 0.0),
-                ("bar".to_string(), 1.0),
-                ("baz".to_string(), 2.0),
-            ] {
-                store.set(&store.append(), &COLUMNS, &[id, score]);
             }
         }
 
@@ -124,24 +128,11 @@ fn main() {
                     let mut draw_state = draw_state.write().unwrap();
                     draw_state.is_down = false;
 
-                    let new_stroke = draw_state.current_stroke.drain(0..).collect();
+                    let new_stroke = draw_state.current_stroke.clone();
                     draw_state.strokes.push(new_stroke);
+                    draw_state.current_stroke = Stroke::default();
 
-                    let sample = StrokeSample::new(
-                        draw_state
-                            .strokes
-                            .iter()
-                            .cloned()
-                            .map(|stroke| {
-                                detexify::Stroke::new(
-                                    stroke
-                                        .into_iter()
-                                        .map(|(x, y)| detexify::point::Point { x, y })
-                                        .collect(),
-                                )
-                            })
-                            .collect(),
-                    );
+                    let sample = StrokeSample::new(draw_state.strokes.clone());
                     let results = draw_state.classifier.classify(sample);
 
                     let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
@@ -151,7 +142,12 @@ fn main() {
                     for result in results.iter() {
                         let id =
                             String::from_utf8(base64::decode(result.id.clone()).unwrap()).unwrap();
-                        store.set(&store.append(), &COLUMNS, &[&id, &result.score]);
+
+                        let s = format!("{}\n{}", id, result.id);
+
+                        let icon = format!("{}-symbolic", result.id);
+
+                        store.set(&store.append(), &COLUMNS, &[&s, &result.score, &icon]);
                         // println!("{:?}", result);
                     }
 
@@ -169,7 +165,7 @@ fn main() {
 
                     if draw_state.is_down {
                         if let Some((x, y)) = motion.get_coords() {
-                            draw_state.current_stroke.push((x, y));
+                            draw_state.current_stroke.add_point(Point { x, y });
                             area.queue_draw(); // trigger draw event
                         }
                     }
@@ -201,12 +197,12 @@ fn main() {
                     .iter()
                     .chain(iter::once(&draw_state.current_stroke))
                 {
-                    for ((x1, y1), (x2, y2)) in stroke.iter().cloned().tuple_windows() {
+                    for (p, q) in stroke.points().cloned().tuple_windows() {
                         ctx.set_line_width(3.0);
                         ctx.set_source_rgb(0.8, 0.8, 0.8);
                         ctx.set_line_cap(cairo::LineCap::Round);
-                        ctx.move_to(x1, y1);
-                        ctx.line_to(x2, y2);
+                        ctx.move_to(p.x, p.y);
+                        ctx.line_to(q.x, q.y);
                         ctx.stroke();
                     }
                 }
