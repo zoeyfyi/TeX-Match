@@ -1,5 +1,5 @@
 [package]
-name = "TeX-Match"
+name = "tex-match"
 version = "0.1.0"
 authors = ["Ben Sheffield <me@mrbenshef.co.uk>"]
 edition = "2018"

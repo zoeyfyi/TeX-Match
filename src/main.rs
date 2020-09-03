@@ -1,13 +1,11 @@
 #[macro_use]
 extern crate shrinkwraprs;
 
-use cairo::LineCap;
 use gio::prelude::*;
 use gladis::Gladis;
 use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
 use itertools::Itertools;
 use std::{
-    f64::consts::PI,
     iter,
     sync::{Arc, RwLock},
 };
@@ -52,7 +50,7 @@ fn main() {
         {
             let draw_state = Arc::clone(&draw_state);
             app.drawing_area
-                .connect_button_press_event(move |area, btn| {
+                .connect_button_press_event(move |_area, _btn| {
                     let mut draw_state = draw_state.write().unwrap();
                     draw_state.is_down = true;
 
@@ -64,7 +62,7 @@ fn main() {
         {
             let draw_state = Arc::clone(&draw_state);
             app.drawing_area
-                .connect_button_release_event(move |area, btn| {
+                .connect_button_release_event(move |_area, _btn| {
                     let mut draw_state = draw_state.write().unwrap();
                     draw_state.is_down = false;
 
@@ -97,7 +95,7 @@ fn main() {
         {
             let draw_state = Arc::clone(&draw_state);
             let drawing_area = app.drawing_area.clone();
-            app.clear_button.connect_clicked(move |button| {
+            app.clear_button.connect_clicked(move |_button| {
                 let mut draw_state = draw_state.write().unwrap();
                 draw_state.strokes.clear();
                 draw_state.current_stroke.clear();
@@ -107,7 +105,7 @@ fn main() {
 
         {
             let draw_state = Arc::clone(&draw_state);
-            app.drawing_area.connect_draw(move |area, ctx| {
+            app.drawing_area.connect_draw(move |_area, ctx| {
                 let draw_state = draw_state.read().unwrap();
 
                 for stroke in draw_state
