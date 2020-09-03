@@ -59,6 +59,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
 
 [[package]]
+name = "base64"
+version = "0.12.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3441f0f7b02788e948e47f457ca01f1d7e6d92c693bc132c22b087d3141c03ff"
+
+[[package]]
 name = "bitflags"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -172,6 +178,17 @@ dependencies = [
  "autocfg",
  "cfg-if",
  "lazy_static",
+]
+
+[[package]]
+name = "detexify"
+version = "0.1.0"
+dependencies = [
+ "itertools 0.9.0",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "tuple",
 ]
 
 [[package]]
@@ -614,6 +631,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "num-traits"
+version = "0.1.43"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92e5113e9fd4cc14ded8e499429f396a20f98c772a47cc8622a736e1ec843c31"
+dependencies = [
+ "num-traits 0.2.12",
+]
+
+[[package]]
+name = "num-traits"
+version = "0.2.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac267bcc07f48ee5f8935ab0d24f316fb722d7a1292e2913f0cc196b29ffd611"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
 name = "once_cell"
 version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -804,6 +839,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b96a9549dc8d48f2c283938303c4b5a77aa29bfbc5b54b084fb1630408899a8f"
 
 [[package]]
+name = "ryu"
+version = "1.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "71d301d4193d031abdd79ff7e3dd721168a9572ef3fe51a1517aba235bd8f86e"
+
+[[package]]
 name = "same-file"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -839,13 +880,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_json"
+version = "1.0.57"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "164eacbdb13512ec2745fb09d51fd5b22b0d65ed294a1dcf7285a360c80a675c"
+dependencies = [
+ "itoa",
+ "ryu 1.0.5",
+ "serde",
+]
+
+[[package]]
 name = "serde_jsonrc"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b591e90bcce7185aa4f8c775c504456586ae0f7df49a4087a1ee4179d402b8a8"
 dependencies = [
  "itoa",
- "ryu",
+ "ryu 0.2.8",
  "serde",
 ]
 
@@ -931,8 +983,10 @@ dependencies = [
 name = "tex-match"
 version = "0.1.0"
 dependencies = [
+ "base64",
  "cairo-rs",
  "crossbeam",
+ "detexify",
  "dirty2",
  "env_logger",
  "fs_extra",
@@ -989,6 +1043,16 @@ version = "0.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ffc92d160b1eef40665be3a05630d003936a3bc7da7421277846c2613e92c71a"
 dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "tuple"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "014493a81b7f393503eb896ab5b268532baff9359a7f4efe347dca3359f317f2"
+dependencies = [
+ "num-traits 0.1.43",
  "serde",
 ]
 

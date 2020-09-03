@@ -1,8 +1,10 @@
 #[macro_use]
 extern crate shrinkwraprs;
 
+use detexify::{Classifier, StrokeSample};
 use gio::prelude::*;
 use gladis::Gladis;
+use glib::Type;
 use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
 use itertools::Itertools;
 use std::{
@@ -24,7 +26,13 @@ struct DrawState {
     strokes: Vec<Vec<(f64, f64)>>,
     current_stroke: Vec<(f64, f64)>,
     is_down: bool,
+    classifier: Classifier,
 }
+const ID_COLUMN: u32 = 0;
+const SCORE_COLUMN: u32 = 1;
+
+const COLUMNS: [u32; 2] = [ID_COLUMN, SCORE_COLUMN];
+const COLUMN_TYPES: [Type; 2] = [Type::String, Type::F64];
 
 fn main() {
     env_logger::init();
@@ -44,9 +52,57 @@ fn main() {
             .unwrap_or_else(|e| panic!("failed to load app.glade: {}", e));
         app.set_application(Some(application));
 
+        {
+            let store = gtk::ListStore::new(&COLUMN_TYPES);
+
+            app.tree_view.set_model(Some(&store));
+
+            store.set_sort_column_id(
+                gtk::SortColumn::Index(SCORE_COLUMN),
+                gtk::SortType::Ascending,
+            );
+
+            {
+                let renderer = gtk::CellRendererText::new();
+
+                let column = gtk::TreeViewColumn::new();
+                column.pack_start(&renderer, true);
+                column.set_sizing(gtk::TreeViewColumnSizing::Autosize);
+                column.add_attribute(&renderer, "markup", ID_COLUMN as i32);
+
+                app.tree_view.append_column(&column);
+            }
+
+            {
+                let renderer = gtk::CellRendererText::new();
+
+                let column = gtk::TreeViewColumn::new();
+                column.pack_start(&renderer, true);
+                column.set_sizing(gtk::TreeViewColumnSizing::Autosize);
+                column.add_attribute(&renderer, "markup", SCORE_COLUMN as i32);
+
+                app.tree_view.append_column(&column);
+            }
+
+            for (id, score) in &[
+                ("foo".to_string(), 0.0),
+                ("bar".to_string(), 1.0),
+                ("baz".to_string(), 2.0),
+                ("foo".to_string(), 0.0),
+                ("bar".to_string(), 1.0),
+                ("baz".to_string(), 2.0),
+                ("foo".to_string(), 0.0),
+                ("bar".to_string(), 1.0),
+                ("baz".to_string(), 2.0),
+            ] {
+                store.set(&store.append(), &COLUMNS, &[id, score]);
+            }
+        }
+
         let draw_state = Arc::new(RwLock::new(DrawState::default()));
 
-        // on mouse down, set `is_down` to true
+        // on mouse down
+        // set `is_down` to true
         {
             let draw_state = Arc::clone(&draw_state);
             app.drawing_area
@@ -58,9 +114,11 @@ fn main() {
                 });
         }
 
-        // on mouse up, set `is_down` to false and add `new_stroke` to `strokes`
+        // on mouse up
+        // set `is_down` to false and add `new_stroke` to `strokes`
         {
             let draw_state = Arc::clone(&draw_state);
+            let tree_view = app.tree_view.clone();
             app.drawing_area
                 .connect_button_release_event(move |_area, _btn| {
                     let mut draw_state = draw_state.write().unwrap();
@@ -69,11 +127,40 @@ fn main() {
                     let new_stroke = draw_state.current_stroke.drain(0..).collect();
                     draw_state.strokes.push(new_stroke);
 
+                    let sample = StrokeSample::new(
+                        draw_state
+                            .strokes
+                            .iter()
+                            .cloned()
+                            .map(|stroke| {
+                                detexify::Stroke::new(
+                                    stroke
+                                        .into_iter()
+                                        .map(|(x, y)| detexify::point::Point { x, y })
+                                        .collect(),
+                                )
+                            })
+                            .collect(),
+                    );
+                    let results = draw_state.classifier.classify(sample);
+
+                    let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
+
+                    store.clear();
+
+                    for result in results.iter() {
+                        let id =
+                            String::from_utf8(base64::decode(result.id.clone()).unwrap()).unwrap();
+                        store.set(&store.append(), &COLUMNS, &[&id, &result.score]);
+                        // println!("{:?}", result);
+                    }
+
                     Inhibit(false)
                 });
         }
 
-        // on mouse movement, if the mouse is down, add the current location to current stroke
+        // on mouse movement
+        // if the mouse is down, add the current location to current stroke
         {
             let draw_state = Arc::clone(&draw_state);
             app.drawing_area
@@ -91,7 +178,8 @@ fn main() {
                 });
         }
 
-        // on clear, remove strokes
+        // on clear button
+        // remove strokes
         {
             let draw_state = Arc::clone(&draw_state);
             let drawing_area = app.drawing_area.clone();

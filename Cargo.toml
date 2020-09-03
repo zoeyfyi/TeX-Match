@@ -23,6 +23,8 @@ serde_jsonrc = "0.1"
 # Logging
 log = "0.4.11"
 env_logger = "0.7.1"
+# TeX classification
+detexify = { path = "../detexify-rust/detexify" }
 # Misc utils
 lazy_static = "1.4.0"
 rust-embed = { version = "5.6.0", features = ["debug-embed"] }
@@ -30,6 +32,7 @@ dirty2 = "0.1.0"
 simple-error = "0.2"
 crossbeam = "0.7.3"
 itertools = "0.9.0"
+base64 = "0.12.3"
 
 [dependencies.gtk]
 version = "0.9"
