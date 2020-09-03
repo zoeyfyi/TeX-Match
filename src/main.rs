@@ -4,7 +4,7 @@ extern crate shrinkwraprs;
 use cairo::LineCap;
 use gio::prelude::*;
 use gladis::Gladis;
-use gtk::{prelude::*, Application, ApplicationWindow, DrawingArea, TreeView};
+use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
 use itertools::Itertools;
 use std::{
     f64::consts::PI,
@@ -18,6 +18,7 @@ struct App {
     window: ApplicationWindow,
     drawing_area: DrawingArea,
     tree_view: TreeView,
+    clear_button: Button,
 }
 
 #[derive(Default)]
@@ -90,6 +91,18 @@ fn main() {
 
                     Inhibit(false)
                 });
+        }
+
+        // on clear, remove strokes
+        {
+            let draw_state = Arc::clone(&draw_state);
+            let drawing_area = app.drawing_area.clone();
+            app.clear_button.connect_clicked(move |button| {
+                let mut draw_state = draw_state.write().unwrap();
+                draw_state.strokes.clear();
+                draw_state.current_stroke.clear();
+                drawing_area.queue_draw(); // trigger draw event
+            });
         }
 
         {
