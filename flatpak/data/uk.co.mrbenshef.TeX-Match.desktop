@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=TeX Match
+Comment=Search through over 1000 different LaTeX symbols by sketching
+Type=Application
+Exec=tex-match
+Terminal=false
+Categories=Utility;GTK;
+Keywords=GTK;Tools;
+Icon=uk.co.mrbenshef.TeX-Match
+StartupNotify=true

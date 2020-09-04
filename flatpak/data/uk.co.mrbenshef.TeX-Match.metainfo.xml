@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>uk.co.mrbenshef.TeX-Match</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>TeX Match</name>
+  <summary>Search through over 1000 different LaTeX symbols by sketching.</summary>
+  <description>
+    <p>If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/TeX-Match.gif</image>
+      <caption>Main Window</caption>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://tex-match.mrbenshef.co.uk/</url>
+  <content_rating type="oars-1.0" />
+  <releases>
+    <release version="0.1.0" date="2020-09-04">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
+  <kudos>
+    <!--
+    GNOME Software kudos:
+    https://gitlab.gnome.org/GNOME/gnome-software/blob/master/doc/kudos.md
+    -->
+    <kudo>ModernToolkit</kudo>
+    <kudo>HiDpiIcon</kudo>
+  </kudos>
+  <developer_name>Ben Sheffield</developer_name>
+  <update_contact>me@mrbenshef.co.uk</update_contact>
+
+  <launchable type="desktop-id">uk.co.mrbenshef.TeX-Match.desktop</launchable>
+</component>
