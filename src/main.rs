@@ -10,7 +10,7 @@ use itertools::Itertools;
 use log::{info, warn};
 use std::{
     iter,
-    sync::{Arc, RwLock},
+    sync::{Arc, RwLock}, f64::consts::PI,
 };
 
 #[derive(Gladis, Clone, Shrinkwrap)]
@@ -101,10 +101,13 @@ fn main() {
         {
             let draw_state = Arc::clone(&draw_state);
             app.drawing_area
-                .connect_button_press_event(move |_area, _btn| {
+                .connect_button_press_event(move |area, btn| {
                     let mut draw_state = draw_state.write().unwrap();
                     draw_state.is_down = true;
-
+                    if let Some((x, y)) = btn.get_coords() {
+                        draw_state.current_stroke.add_point(Point { x, y });
+                        area.queue_draw(); // trigger draw event
+                    }
                     Inhibit(false)
                 });
         }
@@ -178,6 +181,7 @@ fn main() {
                     .iter()
                     .chain(iter::once(&draw_state.current_stroke))
                 {
+                    let mut looped = false;
                     for (p, q) in stroke.points().cloned().tuple_windows() {
                         ctx.set_line_width(3.0);
                         ctx.set_source_rgb(0.8, 0.8, 0.8);
@@ -185,6 +189,15 @@ fn main() {
                         ctx.move_to(p.x, p.y);
                         ctx.line_to(q.x, q.y);
                         ctx.stroke();
+                        looped = true;
+                    }
+
+                    if !looped && stroke.points().count() == 1 {
+                        println!("drawing point");
+                        let p = stroke.points().next().unwrap();
+                        ctx.set_source_rgb(0.8, 0.8, 0.8);
+                        ctx.arc(p.x, p.y, 1.5, 0.0, 2.0 * PI);
+                        ctx.fill();
                     }
                 }
 
