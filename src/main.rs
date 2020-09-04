@@ -7,7 +7,7 @@ use gladis::Gladis;
 use glib::Type;
 use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
 use itertools::Itertools;
-use log::warn;
+use log::{info, warn};
 use std::{
     iter,
     sync::{Arc, RwLock},
@@ -34,6 +34,11 @@ const TEXT_COLUMN: u32 = 1;
 
 const COLUMNS: [u32; 2] = [ICON_COLUMN, TEXT_COLUMN];
 const COLUMN_TYPES: [Type; 2] = [Type::String, Type::String];
+
+enum ListItem<'a> {
+    Symbol(detexify::Symbol),
+    Score(&'a detexify::Score),
+}
 
 fn main() {
     env_logger::init();
@@ -85,6 +90,8 @@ fn main() {
 
                 app.tree_view.append_column(&column);
             }
+
+            update_store(store, detexify::iter_symbols().map(ListItem::Symbol))
         }
 
         let draw_state = Arc::new(RwLock::new(DrawState::default()));
@@ -116,49 +123,12 @@ fn main() {
                     draw_state.strokes.push(new_stroke);
                     draw_state.current_stroke = Stroke::default();
 
-                    if let Some( sample) = StrokeSample::new(draw_state.strokes.clone()) {
+                    if let Some(sample) = StrokeSample::new(draw_state.strokes.clone()) {
                         if let Some(results) = draw_state.classifier.classify(sample) {
-                            let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
-        
-                            store.clear();
-        
-                            for result in results.iter() {
-                                let id =
-                                    String::from_utf8(base64::decode(result.id.clone()).unwrap()).unwrap();
-        
-                                if let Some(symbol) = Symbol::from_id(&result.id) {
-        
-                                    let mode = match (symbol.text_mode, symbol.math_mode) {
-                                        (true, true) => "textmode & mathmode",
-                                        (true, false) => "textmode",
-                                        (false, true) => "mathmode",
-                                        (false, false) => "",
-                                    };
+                            let store: gtk::ListStore =
+                                tree_view.get_model().unwrap().downcast().unwrap();
 
-                                    let s = if symbol.package != "latex2e" {
-                                        format!(
-                                            "<span size=\"smaller\">\\usepackage{{ {} }}</span>\n<b>{}</b>\n<span size=\"x-small\">{} (score: {:.4})</span>", 
-                                            symbol.package, 
-                                            symbol.command, 
-                                            mode,
-                                            result.score, 
-                                        )
-                                    } else {
-                                        format!(
-                                            "<b>{}</b>\n<span size=\"x-small\">{} (score: {:.4})</span>", 
-                                            symbol.command, 
-                                            mode,
-                                            result.score, 
-                                        )
-                                    };
-        
-                                    let icon = format!("{}-symbolic", result.id);
-        
-                                    store.set(&store.append(), &COLUMNS, &[&icon, &s]);
-                                } else {
-                                    warn!("cannot find symbol for {}", id);
-                                }
-                            }
+                            update_store(store, results.iter().map(ListItem::Score));
                         }
                     }
 
@@ -226,4 +196,57 @@ fn main() {
     });
 
     application.run(&[]);
+}
+
+fn update_store<'a>(store: gtk::ListStore, results: impl Iterator<Item = ListItem<'a>>) {
+    store.clear();
+
+    info!("updating");
+
+    for result in results {
+        let (id, symbol, score) = match result {
+            ListItem::Symbol(s) => (s.id().to_string(), s, -1.0f64),
+            ListItem::Score(detexify::Score { id, score }) => {
+                if let Some(symbol) = Symbol::from_id(id) {
+                    (id.clone(), symbol, *score)
+                } else {
+                    warn!("could not find id: {}", id);
+                    continue;
+                }
+            }
+        };
+
+        let mode = match (symbol.text_mode, symbol.math_mode) {
+            (true, true) => "textmode & mathmode",
+            (true, false) => "textmode",
+            (false, true) => "mathmode",
+            (false, false) => "",
+        };
+
+        let mut s = String::with_capacity(256);
+
+        if symbol.package != "latex2e" {
+            s.push_str(&format!(
+                "<span size=\"smaller\">\\usepackage{{ {} }}</span>\n",
+                symbol.package,
+            ));
+        }
+
+        s.push_str(&format!(
+            "<b>{}</b>\n<span size=\"x-small\">{}",
+            symbol.command, mode
+        ));
+
+        if score >= 0.0 {
+            s.push_str(&format!(" (score: {:.4})", score));
+        }
+
+        s.push_str("</span>");
+
+        s = s.replace("&", "&amp;");
+
+        let icon = format!("{}-symbolic", id);
+
+        store.set(&store.append(), &COLUMNS, &[&icon, &s]);
+    }
 }
