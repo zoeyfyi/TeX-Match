@@ -183,6 +183,8 @@ dependencies = [
 [[package]]
 name = "detexify"
 version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "14a7b0e3e3eac911a064caca2a68813b3bb8bf29b94e9b57d4950dd30f6fc675"
 dependencies = [
  "base64",
  "itertools 0.9.0",
