@@ -58,7 +58,7 @@ sudo flatpak install -y flathub org.freedesktop.Platform//19.08 org.freedesktop.
 wget https://github.com/flatpak/flatpak-builder/releases/download/1.0.10/flatpak-builder-1.0.10.tar.xz && tar -xvf flatpak-builder-1.0.10.tar.xz && cd flatpak-builder-1.0.10 && ./configure --disable-documentation && make && sudo make install
 sudo apt-get install python3-toml
 bash flatpak/gen-sources.sh
-flatpak-builder --repo=repo build-dir flatpak/uk.co.mrbenshef.TeX-Match.json
+flatpak-builder --repo=repo build-dir flatpak/uk.co.mrbenshef.TeX-Match/uk.co.mrbenshef.TeX-Match.json
 flatpak build-bundle ./repo tex-match.flatpak uk.co.mrbenshef.TeX-Match
 ```
 

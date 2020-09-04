@@ -1,0 +1,38 @@
+name: tex-match
+title: TeX Match
+version: '0.1.0'
+icon: snap/gui/tex-match.png
+summary: Search through over 1000 different LaTeX symbols by sketching.
+description: |
+  If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching.
+
+base: core18
+confinement: strict
+
+build-packages:
+  - gcc
+  - libc6-dev
+
+parts:
+  tex-match:
+    plugin: rust
+    source: .
+
+slots:
+  dbus-daemon:
+    interface: dbus
+    bus: session
+    name: uk.co.mrbenshef.TeX-Match
+
+apps:
+  tex-match:
+    command: bin/tex-match
+    extensions: [gnome-3-34]
+    plugs:
+    - desktop
+    - desktop-legacy
+    - wayland
+    - unity7
+    slots:
+    - dbus-daemon
+    common-id: uk.co.mrbenshef.TeX-Match
