@@ -13,7 +13,7 @@ use std::{
     iter,
     sync::{Arc, RwLock},
     thread,
-    time::{Instant, Duration},
+    time::{Duration, Instant},
 };
 
 #[derive(Gladis, Clone, Shrinkwrap)]
@@ -26,17 +26,19 @@ struct App {
 }
 
 #[derive(Clone, Default)]
-struct DrawState {
+struct AppState {
     strokes: Vec<Stroke>,
     current_stroke: Stroke,
-    is_down: bool,
+    is_mouse_down: bool,
 }
 
 const ICON_COLUMN: u32 = 0;
 const TEXT_COLUMN: u32 = 1;
+const COMMAND_COLUMN: u32 = 2;
+const PACKAGE_COLUMN: u32 = 3;
 
-const COLUMNS: [u32; 2] = [ICON_COLUMN, TEXT_COLUMN];
-const COLUMN_TYPES: [Type; 2] = [Type::String, Type::String];
+const COLUMNS: [u32; 4] = [ICON_COLUMN, TEXT_COLUMN, COMMAND_COLUMN, PACKAGE_COLUMN];
+const COLUMN_TYPES: [Type; 4] = [Type::String, Type::String, Type::String, Type::String];
 
 enum ListItem<'a> {
     Symbol(detexify::Symbol),
@@ -50,7 +52,7 @@ fn main() {
         .expect("failed to initialize GTK application");
 
     application.connect_activate(move |application| {
-        let (mut request_receiver, request_updater) = single_value_channel::channel::<DrawState>();
+        let (mut request_receiver, request_updater) = single_value_channel::channel::<AppState>();
         let (responce_sender, responce_receiver) =
             glib::MainContext::channel(glib::PRIORITY_DEFAULT);
 
@@ -61,8 +63,8 @@ fn main() {
             loop {
                 let request = request_receiver.latest_mut();
 
-                if let Some(draw_state) = request.take() {
-                    if let Some(sample) = detexify::StrokeSample::new(draw_state.strokes) {
+                if let Some(app_state) = request.take() {
+                    if let Some(sample) = detexify::StrokeSample::new(app_state.strokes) {
                         let start = Instant::now();
                         match classifier.classify(sample) {
                             Some(results) => {
@@ -70,7 +72,10 @@ fn main() {
                             }
                             None => warn!("classifier returned None"),
                         }
-                        info!("classification complete in {}ms", start.elapsed().as_millis());
+                        info!(
+                            "classification complete in {}ms",
+                            start.elapsed().as_millis()
+                        );
                     }
                 }
 
@@ -92,6 +97,8 @@ fn main() {
         let app: App = App::from_resource("/uk/co/mrbenshef/TeX-Match/app.glade")
             .unwrap_or_else(|e| panic!("failed to load app.glade: {}", e));
         app.set_application(Some(application));
+
+        let app_state = Arc::new(RwLock::new(AppState::default()));
 
         {
             let store = gtk::ListStore::new(&COLUMN_TYPES);
@@ -125,6 +132,34 @@ fn main() {
             update_store(store, detexify::iter_symbols().map(ListItem::Symbol))
         }
 
+        {
+            app.tree_view
+                .connect_row_activated(move |tree_view, _path, _column| {
+                    let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
+
+                    if let (Some(path), _) = tree_view.get_cursor() {
+                        tree_view.get_selection().unselect_all();
+
+                        let buffer = store
+                            .get_value(
+                                &store
+                                    .get_iter(&path)
+                                    .expect("failed to get list store iter"),
+                                COMMAND_COLUMN as i32,
+                            )
+                            .downcast::<String>()
+                            .expect("failed to downcast column to string")
+                            .get()
+                            .expect("column string was None");
+
+                        info!("clicked: {}", buffer);
+
+                        let clipboard = tree_view.get_clipboard(&gdk::SELECTION_CLIPBOARD);
+                        clipboard.set_text(&buffer);
+                    }
+                });
+        }
+
         // on receive classification result
         // update store
         {
@@ -136,18 +171,16 @@ fn main() {
             });
         }
 
-        let draw_state = Arc::new(RwLock::new(DrawState::default()));
-
         // on mouse down
         // set `is_down` to true
         {
-            let draw_state = Arc::clone(&draw_state);
+            let app_state = Arc::clone(&app_state);
             app.drawing_area
                 .connect_button_press_event(move |area, btn| {
-                    let mut draw_state = draw_state.write().unwrap();
-                    draw_state.is_down = true;
+                    let mut app_state = app_state.write().unwrap();
+                    app_state.is_mouse_down = true;
                     if let Some((x, y)) = btn.get_coords() {
-                        draw_state.current_stroke.add_point(Point { x, y });
+                        app_state.current_stroke.add_point(Point { x, y });
                         area.queue_draw(); // trigger draw event
                     }
                     Inhibit(false)
@@ -157,18 +190,18 @@ fn main() {
         // on mouse up
         // set `is_down` to false and add `new_stroke` to `strokes`
         {
-            let draw_state = Arc::clone(&draw_state);
+            let app_state = Arc::clone(&app_state);
             app.drawing_area
                 .connect_button_release_event(move |_area, _btn| {
-                    let mut draw_state = draw_state.write().unwrap();
-                    draw_state.is_down = false;
+                    let mut app_state = app_state.write().unwrap();
+                    app_state.is_mouse_down = false;
 
-                    let new_stroke = draw_state.current_stroke.clone();
-                    draw_state.strokes.push(new_stroke);
-                    draw_state.current_stroke = Stroke::default();
+                    let new_stroke = app_state.current_stroke.clone();
+                    app_state.strokes.push(new_stroke);
+                    app_state.current_stroke = Stroke::default();
 
                     request_updater
-                        .update(Some(draw_state.clone()))
+                        .update(Some(app_state.clone()))
                         .expect("classification channel closed");
 
                     Inhibit(false)
@@ -178,14 +211,14 @@ fn main() {
         // on mouse movement
         // if the mouse is down, add the current location to current stroke
         {
-            let draw_state = Arc::clone(&draw_state);
+            let app_state = Arc::clone(&app_state);
             app.drawing_area
                 .connect_motion_notify_event(move |area, motion| {
-                    let mut draw_state = draw_state.write().unwrap();
+                    let mut app_state = app_state.write().unwrap();
 
-                    if draw_state.is_down {
+                    if app_state.is_mouse_down {
                         if let Some((x, y)) = motion.get_coords() {
-                            draw_state.current_stroke.add_point(Point { x, y });
+                            app_state.current_stroke.add_point(Point { x, y });
                             area.queue_draw(); // trigger draw event
                         }
                     }
@@ -197,25 +230,25 @@ fn main() {
         // on clear button
         // remove strokes
         {
-            let draw_state = Arc::clone(&draw_state);
+            let app_state = Arc::clone(&app_state);
             let drawing_area = app.drawing_area.clone();
             app.clear_button.connect_clicked(move |_button| {
-                let mut draw_state = draw_state.write().unwrap();
-                draw_state.strokes.clear();
-                draw_state.current_stroke.clear();
+                let mut app_state = app_state.write().unwrap();
+                app_state.strokes.clear();
+                app_state.current_stroke.clear();
                 drawing_area.queue_draw(); // trigger draw event
             });
         }
 
         {
-            let draw_state = Arc::clone(&draw_state);
+            let app_state = Arc::clone(&app_state);
             app.drawing_area.connect_draw(move |_area, ctx| {
-                let draw_state = draw_state.read().unwrap();
+                let app_state = app_state.read().unwrap();
 
-                for stroke in draw_state
+                for stroke in app_state
                     .strokes
                     .iter()
-                    .chain(iter::once(&draw_state.current_stroke))
+                    .chain(iter::once(&app_state.current_stroke))
                 {
                     let mut looped = false;
                     for (p, q) in stroke.points().cloned().tuple_windows() {
@@ -295,6 +328,10 @@ fn update_store<'a>(store: gtk::ListStore, results: impl Iterator<Item = ListIte
 
         let icon = format!("{}-symbolic", id);
 
-        store.set(&store.append(), &COLUMNS, &[&icon, &s]);
+        store.set(
+            &store.append(),
+            &COLUMNS,
+            &[&icon, &s, &symbol.command, &symbol.package],
+        );
     }
 }
