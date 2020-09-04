@@ -1,7 +1,7 @@
 <h1 align="center">TeX Match</h1>
 
 <p align="center">
-  <img src="TeX-Match.gif">
+  <img src="TeX-Match.gif" width="660px">
 </p>
 
 <h2 align="center">A desktop version of <a href="https://detexify.kirelabs.org/classify.html">detexify</a></h2>
