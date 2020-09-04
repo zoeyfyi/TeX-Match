@@ -1,2 +1,6 @@
 /target
 *~
+build-dir
+.flatpak-builder
+generated-sources.json
+repo
