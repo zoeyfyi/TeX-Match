@@ -4,3 +4,4 @@ build-dir
 .flatpak-builder
 generated-sources.json
 repo
+tex-match.flatpak
