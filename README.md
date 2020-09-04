@@ -47,7 +47,7 @@ cargo build
 ```shell
 sudo apt-get install snap snapcraft
 snapcraft snap
-sudo snap install tex-match_1.1.0_amd64.snap
+sudo snap install tex-match_0.1.0_amd64.snap
 ```
 
 #### Linux Flatpak
