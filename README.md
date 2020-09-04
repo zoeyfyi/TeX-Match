@@ -76,7 +76,7 @@ I don't really understand why sourceview isn't picked up automatically by system
 ```powershell
 git clone https://github.com/wingtk/gvsbuild.git C:\gtk-build\github\gvsbuild
 cd C:\gtk-build\github\gvsbuild; python .\build.py build -p=x64 --vs-ver=16 --msys-dir=C:\msys64 -k --enable-gi --py-wheel --py-egg gtk3 gdk-pixbuf gtksourceview3
-${Env:GTKSOURCEVIEW_3.0_NO_PKG_CONFIG}=1; ${Env:SYSTEM_DEPS_GTKSOURCEVIEW_3.0_LIB}="gtksourceview-3.0"; cargo build
+cargo build
 ```
 
 #### Windows Installer
@@ -84,5 +84,5 @@ ${Env:GTKSOURCEVIEW_3.0_NO_PKG_CONFIG}=1; ${Env:SYSTEM_DEPS_GTKSOURCEVIEW_3.0_LI
 ```powershell
 # follow build steps above, then:
 cargo install cargo-wix 
-${Env:GTKSOURCEVIEW_3.0_NO_PKG_CONFIG}=1; ${Env:SYSTEM_DEPS_GTKSOURCEVIEW_3.0_LIB}="gtksourceview-3.0"; cargo wix -v
+cargo wix -v
 ```
