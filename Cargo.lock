@@ -1037,6 +1037,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "634bf7bc1315698154cb1b45c1db17fcd2e5ce41f925b7b4063e971536714bf1"
 
 [[package]]
+name = "single_value_channel"
+version = "1.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fcbf0d4b0fde6c869e577fd41c50bd3da7179b61aafdd049a3c068a3fe00ba57"
+
+[[package]]
 name = "siphasher"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1128,6 +1134,7 @@ dependencies = [
  "serde_jsonrc",
  "shrinkwraprs",
  "simple-error",
+ "single_value_channel",
 ]
 
 [[package]]

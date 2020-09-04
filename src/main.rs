@@ -1,16 +1,19 @@
 #[macro_use]
 extern crate shrinkwraprs;
 
-use detexify::{point::Point, Classifier, Stroke, StrokeSample, Symbol};
+use detexify::{point::Point, Classifier, Stroke, Symbol};
 use gio::prelude::*;
 use gladis::Gladis;
 use glib::Type;
 use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
 use itertools::Itertools;
-use log::{info, warn};
+use log::*;
 use std::{
+    f64::consts::PI,
     iter,
-    sync::{Arc, RwLock}, f64::consts::PI,
+    sync::{Arc, RwLock},
+    thread,
+    time::{Instant, Duration},
 };
 
 #[derive(Gladis, Clone, Shrinkwrap)]
@@ -22,13 +25,13 @@ struct App {
     clear_button: Button,
 }
 
-#[derive(Default)]
+#[derive(Clone, Default)]
 struct DrawState {
     strokes: Vec<Stroke>,
     current_stroke: Stroke,
     is_down: bool,
-    classifier: Classifier,
 }
+
 const ICON_COLUMN: u32 = 0;
 const TEXT_COLUMN: u32 = 1;
 
@@ -47,6 +50,34 @@ fn main() {
         .expect("failed to initialize GTK application");
 
     application.connect_activate(move |application| {
+        let (mut request_receiver, request_updater) = single_value_channel::channel::<DrawState>();
+        let (responce_sender, responce_receiver) =
+            glib::MainContext::channel(glib::PRIORITY_DEFAULT);
+
+        thread::spawn(move || {
+            info!("classifier thread started");
+            let classifier = Classifier::default();
+
+            loop {
+                let request = request_receiver.latest_mut();
+
+                if let Some(draw_state) = request.take() {
+                    if let Some(sample) = detexify::StrokeSample::new(draw_state.strokes) {
+                        let start = Instant::now();
+                        match classifier.classify(sample) {
+                            Some(results) => {
+                                responce_sender.send(results).expect("glib channel closed");
+                            }
+                            None => warn!("classifier returned None"),
+                        }
+                        info!("classification complete in {}ms", start.elapsed().as_millis());
+                    }
+                }
+
+                thread::sleep(Duration::from_millis(100));
+            }
+        });
+
         // resources.gresources is created by build.rs
         // it includes all the files in the resources directory
         let resource_bytes =
@@ -94,6 +125,17 @@ fn main() {
             update_store(store, detexify::iter_symbols().map(ListItem::Symbol))
         }
 
+        // on receive classification result
+        // update store
+        {
+            let tree_view = app.tree_view.clone();
+            responce_receiver.attach(None, move |msg| {
+                let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
+                update_store(store, msg.iter().map(ListItem::Score));
+                glib::Continue(true)
+            });
+        }
+
         let draw_state = Arc::new(RwLock::new(DrawState::default()));
 
         // on mouse down
@@ -116,7 +158,6 @@ fn main() {
         // set `is_down` to false and add `new_stroke` to `strokes`
         {
             let draw_state = Arc::clone(&draw_state);
-            let tree_view = app.tree_view.clone();
             app.drawing_area
                 .connect_button_release_event(move |_area, _btn| {
                     let mut draw_state = draw_state.write().unwrap();
@@ -126,14 +167,9 @@ fn main() {
                     draw_state.strokes.push(new_stroke);
                     draw_state.current_stroke = Stroke::default();
 
-                    if let Some(sample) = StrokeSample::new(draw_state.strokes.clone()) {
-                        if let Some(results) = draw_state.classifier.classify(sample) {
-                            let store: gtk::ListStore =
-                                tree_view.get_model().unwrap().downcast().unwrap();
-
-                            update_store(store, results.iter().map(ListItem::Score));
-                        }
-                    }
+                    request_updater
+                        .update(Some(draw_state.clone()))
+                        .expect("classification channel closed");
 
                     Inhibit(false)
                 });
@@ -193,7 +229,6 @@ fn main() {
                     }
 
                     if !looped && stroke.points().count() == 1 {
-                        println!("drawing point");
                         let p = stroke.points().next().unwrap();
                         ctx.set_source_rgb(0.8, 0.8, 0.8);
                         ctx.arc(p.x, p.y, 1.5, 0.0, 2.0 * PI);

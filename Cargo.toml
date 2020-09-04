@@ -33,6 +33,7 @@ simple-error = "0.2"
 crossbeam = "0.7.3"
 itertools = "0.9.0"
 base64 = "0.12.3"
+single_value_channel = "1.2.1"
 
 [dependencies.gtk]
 version = "0.9"
