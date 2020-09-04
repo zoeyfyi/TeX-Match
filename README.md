@@ -31,6 +31,8 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
 | :--- | :--- | :--- |
 | [tex-match.linux.amd64](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.linux.amd64) </br> [tex-match.flatpak](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.flatpak) </br> [tex-match.snap](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.snap) <!---</br> [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/tex-match) </br> <a href='https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match'><img width='190' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>--> | [tex-match.windows.msi](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.windows.msi) | You should really use the [detexify Mac app](https://gum.co/detexify), </br> but if you _really_ want to: </br> [tex-match.macos](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.macos) |
 
+Check out my other project, [Boop-GTK](https://github.com/mrbenshef/Boop-GTK): A scriptable scratchpad for developers.
+
 ### Building
 
 #### Linux
