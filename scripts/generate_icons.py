@@ -26,15 +26,14 @@ with open(symbols_file) as file:
             if "fontenc" in symbol:
                 fontenc = symbol["fontenc"]
             if "bothmodes" in symbol:
-                for symbol in symbol["bothmodes"]:
-                    add_symbol(symbol, package, fontenc, True, True)
+                for s in symbol["bothmodes"]:
+                    add_symbol(s, package, fontenc, True, True)
             if "textmode" in symbol:
-                for symbol in symbol["textmode"]:
-                    add_symbol(symbol, package, fontenc, True, False)
+                for s in symbol["textmode"]:
+                    add_symbol(s, package, fontenc, True, False)
             if "mathmode" in symbol:
-                for symbol in symbol["mathmode"]:
-                    add_symbol(symbol, package, fontenc, False, True)
-
+                for s in symbol["mathmode"]:
+                    add_symbol(s, package, fontenc, False, True)
 
 for (symbol, package, fontenc, textmode, mathmode) in parsed_symbols:
     print("{:30} {:10} {:4} {} {}".format(symbol, package, fontenc, textmode, mathmode))
