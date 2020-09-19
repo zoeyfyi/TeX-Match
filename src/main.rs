@@ -6,7 +6,8 @@ use gio::prelude::*;
 use gladis::Gladis;
 use glib::{SourceId, Type};
 use gtk::{
-    prelude::*, AboutDialog, Application, ApplicationWindow, Button, DrawingArea, Label, Revealer, TreeView,
+    prelude::*, AboutDialog, Application, ApplicationWindow, Button, DrawingArea, Label, Revealer,
+    TreeView,
 };
 
 use itertools::Itertools;
