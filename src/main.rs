@@ -4,8 +4,10 @@ extern crate shrinkwraprs;
 use detexify::{point::Point, Classifier, Stroke, Symbol};
 use gio::prelude::*;
 use gladis::Gladis;
-use glib::Type;
-use gtk::{prelude::*, Application, ApplicationWindow, Button, DrawingArea, TreeView};
+use glib::{SourceId, Type};
+use gtk::{
+    prelude::*, Application, ApplicationWindow, Button, DrawingArea, Label, Revealer, TreeView,
+};
 use itertools::Itertools;
 use log::*;
 use std::{
@@ -23,6 +25,9 @@ struct App {
     drawing_area: DrawingArea,
     tree_view: TreeView,
     clear_button: Button,
+    notification_revealer: Revealer,
+    notification_button: Button,
+    notification_label: Label,
 }
 
 #[derive(Clone, Default)]
@@ -52,6 +57,7 @@ fn main() {
         .expect("failed to initialize GTK application");
 
     application.connect_activate(move |application| {
+        application.send_notification(Some("hello"), &gio::Notification::new("Hello world!"));
         let (mut request_receiver, request_updater) = single_value_channel::channel::<AppState>();
         let (responce_sender, responce_receiver) =
             glib::MainContext::channel(glib::PRIORITY_DEFAULT);
@@ -99,6 +105,7 @@ fn main() {
         app.set_application(Some(application));
 
         let app_state = Arc::new(RwLock::new(AppState::default()));
+        let notification_source_id: Arc<RwLock<Option<SourceId>>> = Arc::new(RwLock::new(None)); // SourceId doesnt implement clone, so must be seperate from AppState
 
         {
             let store = gtk::ListStore::new(&COLUMN_TYPES);
@@ -132,7 +139,22 @@ fn main() {
             update_store(store, detexify::iter_symbols().map(ListItem::Symbol))
         }
 
+        // close notification on dismiss
         {
+            let notification_revealer = app.notification_revealer.clone();
+            app.notification_button
+                .connect_button_press_event(move |_button, _event| {
+                    notification_revealer.set_reveal_child(false);
+                    Inhibit(false)
+                });
+        }
+
+        // copy text to clipboard on press
+        {
+            let notification_label = app.notification_label.clone();
+            let notification_revealer = app.notification_revealer.clone();
+            let notification_source_id = Arc::clone(&notification_source_id);
+
             app.tree_view
                 .connect_row_activated(move |tree_view, _path, _column| {
                     let store: gtk::ListStore = tree_view.get_model().unwrap().downcast().unwrap();
@@ -153,6 +175,28 @@ fn main() {
                             .expect("column string was None");
 
                         info!("clicked: {}", buffer);
+
+                        notification_label.set_text(&format!("Copied \"{}\" to clipboard", buffer));
+
+                        notification_revealer.set_reveal_child(true);
+                        {
+                            let notification_revealer = notification_revealer.clone();
+                            // dismiss after 3000ms
+
+                            let mut source_id = notification_source_id.write().unwrap();
+
+                            // cancel old notification timeout
+                            if source_id.is_some() {
+                                glib::source_remove(source_id.take().unwrap());
+                            }
+
+                            let new_source_id = glib::timeout_add_local(3000, move || {
+                                notification_revealer.set_reveal_child(false);
+                                Continue(false)
+                            });
+
+                            source_id.replace(new_source_id);
+                        }
 
                         let clipboard = tree_view.get_clipboard(&gdk::SELECTION_CLIPBOARD);
                         clipboard.set_text(&buffer);
