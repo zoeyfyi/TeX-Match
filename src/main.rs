@@ -6,8 +6,10 @@ use gio::prelude::*;
 use gladis::Gladis;
 use glib::{SourceId, Type};
 use gtk::{
-    prelude::*, Application, ApplicationWindow, Button, DrawingArea, Label, Revealer, TreeView,
+    prelude::*, AboutDialog, Application, ApplicationWindow, Button, DrawingArea, Label, Revealer,
+    TreeView,
 };
+
 use itertools::Itertools;
 use log::*;
 use std::{
@@ -28,6 +30,8 @@ struct App {
     notification_revealer: Revealer,
     notification_button: Button,
     notification_label: Label,
+    about_button: Button,
+    about_dialog: AboutDialog,
 }
 
 #[derive(Clone, Default)]
@@ -107,6 +111,14 @@ fn main() {
         let app_state = Arc::new(RwLock::new(AppState::default()));
         let notification_source_id: Arc<RwLock<Option<SourceId>>> = Arc::new(RwLock::new(None)); // SourceId doesnt implement clone, so must be seperate from AppState
 
+        // add logo to about dialog
+        app.about_dialog.set_logo(
+            gdk_pixbuf::Pixbuf::from_resource("/uk/co/mrbenshef/TeX-Match/tex-match.png")
+                .ok()
+                .as_ref(),
+        );
+
+        // setup symbols store
         {
             let store = gtk::ListStore::new(&COLUMN_TYPES);
 
@@ -149,7 +161,21 @@ fn main() {
                 });
         }
 
-        // copy text to clipboard on press
+        // on about click, open about dialog
+        {
+            let about_dialog: AboutDialog = app.about_dialog.clone();
+            app.about_button.connect_clicked(move |_| {
+                let responce = about_dialog.run();
+                if responce == gtk::ResponseType::DeleteEvent
+                    || responce == gtk::ResponseType::Cancel
+                {
+                    about_dialog.hide();
+                }
+            });
+        }
+
+        // on symbol click
+        // copy to clipboard and display a notification
         {
             let notification_label = app.notification_label.clone();
             let notification_revealer = app.notification_revealer.clone();
