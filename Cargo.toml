@@ -1,8 +1,14 @@
 [package]
 name = "tex-match"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Ben Sheffield <me@mrbenshef.co.uk>"]
 edition = "2018"
+description = """Search through over 1000 different LaTeX symbols by sketching"""
+license = "MIT"
+homepage = "https://tex-match.mrbenshef.co.uk"
+repository = "https://github.com/mrbenshef/tex-match/"
+keywords = ["gtk", "computer-vision", "linux", "latex", "tex"]
+categories = ["computer-vision"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -42,6 +48,9 @@ features = ["v3_16"]
 [dependencies.gio]
 version = "0.9"
 features = ["v2_44"]
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"
 
 [build-dependencies]
 fs_extra = "1.2.0"

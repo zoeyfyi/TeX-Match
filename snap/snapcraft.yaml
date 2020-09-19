@@ -1,6 +1,6 @@
 name: tex-match
 title: TeX Match
-version: '0.1.0'
+version: '1.0.0'
 icon: snap/gui/tex-match.png
 summary: Search through over 1000 different LaTeX symbols by sketching.
 description: |
