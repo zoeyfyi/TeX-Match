@@ -9,6 +9,14 @@ homepage = "https://tex-match.mrbenshef.co.uk"
 repository = "https://github.com/mrbenshef/tex-match/"
 keywords = ["gtk", "computer-vision", "linux", "latex", "tex"]
 categories = ["computer-vision"]
+exclude = [
+    "submodules/flatpak-builder-tools", 
+    "submodules/gvsbuild", 
+    "submodules/Windows-10-Dark",
+    "flatpak",
+    "snap",
+    "wix",
+]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
