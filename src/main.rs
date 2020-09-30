@@ -61,7 +61,6 @@ fn main() {
         .expect("failed to initialize GTK application");
 
     application.connect_activate(move |application| {
-        application.send_notification(Some("hello"), &gio::Notification::new("Hello world!"));
         let (mut request_receiver, request_updater) = single_value_channel::channel::<AppState>();
         let (responce_sender, responce_receiver) =
             glib::MainContext::channel(glib::PRIORITY_DEFAULT);
