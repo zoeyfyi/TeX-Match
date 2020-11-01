@@ -4,14 +4,18 @@
   <metadata_license>CC0</metadata_license>
   <project_license>MIT</project_license>
   <name>TeX Match</name>
-  <summary>Search through over 1000 different LaTeX symbols by sketching.</summary>
+  <summary>Find LaTeX symbols by sketching</summary>
   <description>
     <p>If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching.</p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/TeX-Match.gif</image>
+      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/screenshots/light.png</image>
       <caption>Main Window</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/screenshots/dark.png</image>
+      <caption>Main Window (Adwaita-Dark)</caption>
     </screenshot>
   </screenshots>
   <url type="homepage">https://tex-match.mrbenshef.co.uk/</url>
