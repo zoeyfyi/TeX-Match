@@ -112,7 +112,7 @@ fn main() {
 
         // add logo to about dialog
         app.about_dialog.set_logo(
-            gdk_pixbuf::Pixbuf::from_resource("/uk/co/mrbenshef/TeX-Match/tex-match.png")
+            gdk_pixbuf::Pixbuf::from_resource("/uk/co/mrbenshef/TeX-Match/TeX-Match.png")
                 .ok()
                 .as_ref(),
         );
