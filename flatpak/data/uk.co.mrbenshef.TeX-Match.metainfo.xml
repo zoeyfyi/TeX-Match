@@ -10,8 +10,12 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/TeX-Match.gif</image>
+      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/screenshots/light.png</image>
       <caption>Main Window</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/screenshots/dark.png</image>
+      <caption>Main Window (Adwaita-Dark)</caption>
     </screenshot>
   </screenshots>
   <url type="homepage">https://tex-match.mrbenshef.co.uk/</url>
