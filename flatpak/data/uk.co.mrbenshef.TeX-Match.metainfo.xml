@@ -21,6 +21,13 @@
   <url type="homepage">https://tex-match.mrbenshef.co.uk/</url>
   <content_rating type="oars-1.0" />
   <releases>
+    <release version="1.1.0" date="2020-11-08">
+      <description>
+        <ul>
+          <li>New icon (by Tobias Bernard)</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1" date="2020-09-30">
       <description>
         <p>Remove test notification</p>
