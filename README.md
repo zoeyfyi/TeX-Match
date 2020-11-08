@@ -24,6 +24,12 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
 - Completely offline
 - Crossplatform
 
+### Screenshots
+
+| Adwaita | Adwaita-Dark |
+| :---: | :---: |
+| ![light](screenshots/light.png) | ![dark](screenshots/dark.png) |
+
 ### Get Tex Match
 
 <table width="100%">

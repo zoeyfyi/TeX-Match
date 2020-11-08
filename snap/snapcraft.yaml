@@ -2,7 +2,7 @@ name: tex-match
 title: TeX Match
 version: '1.0.1'
 icon: snap/gui/uk.co.mrbenshef.TeX-Match.svg
-summary: Search through over 1000 different LaTeX symbols by sketching.
+summary: Find LaTeX symbols by sketching
 description: |
   If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching.
 
