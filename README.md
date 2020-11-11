@@ -11,9 +11,8 @@
 ![Continuous integration](https://github.com/mrbenshef/TeX-Match/workflows/Continuous%20integration/badge.svg)
 ![Release](https://github.com/mrbenshef/TeX-Match/workflows/Release/badge.svg?branch=release)
 [![Crates.io](https://img.shields.io/crates/v/tex-match)](https://crates.io/crates/tex-match)
-<!--- [![tex-match](https://snapcraft.io//tex-match/badge.svg)](https://snapcraft.io/tex-match)
+[![tex-match](https://snapcraft.io//tex-match/badge.svg)](https://snapcraft.io/tex-match)
 [![Flathub](https://img.shields.io/flathub/v/uk.co.mrbenshef.TeX-Match)](https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match)
---->
 
 ### What is TeX Match?
 
@@ -25,11 +24,51 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
 - Completely offline
 - Crossplatform
 
+### Screenshots
+
+| Adwaita | Adwaita-Dark |
+| :---: | :---: |
+| ![light](screenshots/light.png) | ![dark](screenshots/dark.png) |
+
 ### Get Tex Match
 
-| Linux | Windows | MacOS |
-| :--- | :--- | :--- |
-| [tex-match.linux.amd64](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.linux.amd64) </br> [tex-match.flatpak](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.flatpak) </br> [tex-match.snap](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.snap) <!---</br> [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/tex-match) </br> <a href='https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match'><img width='190' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>--> | [tex-match.windows.msi](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.windows.msi) | You should really use the [detexify Mac app](https://gum.co/detexify), </br> but if you _really_ want to: </br> [tex-match.macos](https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.macos) |
+<table width="100%">
+    <tr>
+        <th width="33.333%">Linux</th>
+        <th width="33.333%">Windows</th>
+        <th width="33.333%">MacOS</th>
+    </tr>
+    <tr>
+        <td>
+            <a
+                href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.linux.amd64">tex-match.linux.amd64</a>
+            </br>
+            <a
+                href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.flatpak">tex-match.flatpak</a>
+            </br>
+            <a href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.snap">tex-match.snap</a>
+            </br>
+            <a href="https://snapcraft.io/tex-match"><img
+                    src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"
+                    alt="Get it from the Snap Store"></a>
+            </br>
+            <a href="https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match"><img width='190'
+                    alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'></a>
+        </td>
+        <td>
+            <a
+                href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.windows.msi">tex-match.windows.msi</a>
+        </td>
+        <td>
+            You should really use the <a href="https://gum.co/detexify">detexify Mac app</a>,
+            </br>
+            </br>
+            but if you <i>really</i> want to:
+            </br>
+            <a href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.macos">tex-match.macos</a>
+        </td>
+    </tr>
+</table>
 
 Check out my other project, [Boop-GTK](https://github.com/mrbenshef/Boop-GTK): A scriptable scratchpad for developers.
 
@@ -47,7 +86,7 @@ cargo build
 ```shell
 sudo apt-get install snap snapcraft
 snapcraft snap
-sudo snap install tex-match_1.0.1_amd64.snap
+sudo snap install tex-match_1.1.0_amd64.snap
 ```
 
 #### Linux Flatpak
