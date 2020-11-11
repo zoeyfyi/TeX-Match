@@ -329,7 +329,6 @@
       <ComponentRef Id='dll11'/>
       <ComponentRef Id='dll12'/>
       <ComponentRef Id='dll13'/>
-      <ComponentRef Id='dll14'/>
       <ComponentRef Id='dll15'/>
       <ComponentRef Id='dll16'/>
       <ComponentRef Id='exebus'/>
@@ -339,7 +338,6 @@
       <ComponentRef Id='dll21'/>
       <ComponentRef Id='dll22'/>
       <ComponentRef Id='dll23'/>
-      <ComponentRef Id='dll24'/>
       <ComponentRef Id='dll25'/>
       <ComponentRef Id='dll26'/>
       <ComponentRef Id='dll27'/>
