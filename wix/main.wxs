@@ -103,9 +103,6 @@
             <Component Id='dll13' Guid='*' Win64='$(var.Win64)'>
               <File Id='dll13file' Name='atk-1.0-0.dll' DiskId='1' Source='C:\gtk-build\gtk\x64\release\bin\atk-1.0-0.dll' KeyPath='yes'/>
             </Component>
-            <Component Id='dll14' Guid='*' Win64='$(var.Win64)'>
-              <File Id='dll14file' Name='croco-0.6.dll' DiskId='1' Source='C:\gtk-build\gtk\x64\release\bin\croco-0.6.dll' KeyPath='yes'/>
-            </Component>
             <Component Id='dll15' Guid='*' Win64='$(var.Win64)'>
               <File Id='dll15file' Name='fontconfig.dll' DiskId='1' Source='C:\gtk-build\gtk\x64\release\bin\fontconfig.dll' KeyPath='yes'/>
             </Component>
@@ -132,9 +129,6 @@
             </Component>
             <Component Id='dll23' Guid='*' Win64='$(var.Win64)'>
               <File Id='dll23file' Name='pangoft2-1.0-0.dll' DiskId='1' Source='C:\gtk-build\gtk\x64\release\bin\pangoft2-1.0-0.dll' KeyPath='yes'/>
-            </Component>
-            <Component Id='dll24' Guid='*' Win64='$(var.Win64)'>
-              <File Id='dll24file' Name='rsvg-2.0.dll' DiskId='1' Source='C:\gtk-build\gtk\x64\release\bin\rsvg-2.0.dll' KeyPath='yes'/>
             </Component>
             <Component Id='dll25' Guid='*' Win64='$(var.Win64)'>
               <File Id='dll25file' Name='turbojpeg.dll' DiskId='1' Source='C:\gtk-build\gtk\x64\release\bin\turbojpeg.dll' KeyPath='yes'/>
@@ -210,27 +204,27 @@
             <Directory Id='Icons' Name='icons'>
               <Directory Id='Adwaita' Name='Adwaita'>
 
-                <Directory Id='Scalable' Name='16x16'>
+                <Directory Id='Scalable' Name='scalable'>
                   <Directory Id='Ui' Name='ui'>
                     <Component Id='icon2' Guid='*' Win64='$(var.Win64)'>
-                      <File Id='icon2file' Name='window-close-symbolic.symbolic.png' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\16x16\ui\window-close-symbolic.symbolic.png' KeyPath='yes'/>
+                      <File Id='icon2file' Name='window-close-symbolic.svg' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\scalable\ui\window-close-symbolic.svg' KeyPath='yes'/>
                     </Component>
                     <Component Id='icon3' Guid='*' Win64='$(var.Win64)'>
-                      <File Id='icon3file' Name='window-maximize-symbolic.symbolic.png' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\16x16\ui\window-maximize-symbolic.symbolic.png' KeyPath='yes'/>
+                      <File Id='icon3file' Name='window-maximize-symbolic.svg' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\scalable\ui\window-maximize-symbolic.svg' KeyPath='yes'/>
                     </Component>
                     <Component Id='icon4' Guid='*' Win64='$(var.Win64)'>
-                      <File Id='icon4file' Name='window-minimize-symbolic.symbolic.png' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\16x16\ui\window-minimize-symbolic.symbolic.png' KeyPath='yes'/>
+                      <File Id='icon4file' Name='window-minimize-symbolic.svg' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\scalable\ui\window-minimize-symbolic.svg' KeyPath='yes'/>
                     </Component>
                   </Directory>
                   <Directory Id='Actions' Name='actions'>
                     <Component Id='icon1' Guid='*' Win64='$(var.Win64)'>
-                      <File Id='icon1' Name='open-menu-symbolic.symbolic.png' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\16x16\actions\open-menu-symbolic.symbolic.png' KeyPath='yes'/>
+                      <File Id='icon1' Name='open-menu-symbolic.svg' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\scalable\actions\open-menu-symbolic.svg' KeyPath='yes'/>
                     </Component>
                     <Component Id='icon0' Guid='*' Win64='$(var.Win64)'>
-                      <File Id='icon0file' Name='edit-find-symbolic.symbolic.png' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\16x16\actions\edit-find-symbolic.symbolic.png' KeyPath='yes'/>
+                      <File Id='icon0file' Name='edit-find-symbolic.svg' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\scalable\actions\edit-find-symbolic.svg' KeyPath='yes'/>
                     </Component>
                     <Component Id='icon5' Guid='*' Win64='$(var.Win64)'>
-                      <File Id='icon5' Name='edit-clear-symbolic.symbolic.png' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\16x16\actions\edit-clear-symbolic.symbolic.png' KeyPath='yes'/>
+                      <File Id='icon5' Name='edit-clear-symbolic.svg' DiskId='1' Source='C:\msys64\mingw64\share\icons\Adwaita\scalable\actions\edit-clear-symbolic.svg' KeyPath='yes'/>
                     </Component>
                   </Directory>
                 </Directory>
@@ -335,7 +329,6 @@
       <ComponentRef Id='dll11'/>
       <ComponentRef Id='dll12'/>
       <ComponentRef Id='dll13'/>
-      <ComponentRef Id='dll14'/>
       <ComponentRef Id='dll15'/>
       <ComponentRef Id='dll16'/>
       <ComponentRef Id='exebus'/>
@@ -345,7 +338,6 @@
       <ComponentRef Id='dll21'/>
       <ComponentRef Id='dll22'/>
       <ComponentRef Id='dll23'/>
-      <ComponentRef Id='dll24'/>
       <ComponentRef Id='dll25'/>
       <ComponentRef Id='dll26'/>
       <ComponentRef Id='dll27'/>
