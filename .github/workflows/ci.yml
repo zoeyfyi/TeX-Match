@@ -49,6 +49,9 @@ jobs:
       if: runner.os == 'macOS'
       run: brew install gtk+3 pkg-config
     # ======== Windows ========
+    - name: Windows dependencies (msys)
+      if: runner.os == 'windows'
+      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syy --noconfirm mingw-w64-x86_64-pkg-config"
     - name: Windows dependencies (cache gvsbuild)
       if: runner.os == 'windows'
       uses: actions/cache@v2
