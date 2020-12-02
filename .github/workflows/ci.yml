@@ -25,7 +25,8 @@ jobs:
           pkgconfigpath: /usr/lib/pkgconfig
         - os: windows-2019
           pkgconfig: C:\msys64\mingw64\bin\pkg-config.exe
-          pkgconfigpath: C:\msys64\mingw64\lib\pkgconfig
+          pkgconfigpath: C:\gtk-build\gtk\x64\release\lib
+          # C:\msys64\mingw64\lib\pkgconfig
     steps:
     - name: Checkout
       uses: actions/checkout@v2
