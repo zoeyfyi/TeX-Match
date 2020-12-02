@@ -22,7 +22,7 @@ exclude = [
 
 [dependencies]
 # GTK
-glib = "0.9.3"
+glib = "0.10"
 gdk = "0.13"
 gdk-pixbuf = "0.9"
 pango = "0.9"
