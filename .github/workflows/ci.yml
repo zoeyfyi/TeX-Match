@@ -81,6 +81,9 @@ jobs:
     #   if: runner.os == 'windows'
     #   run: echo "C:\gtk-build\gtk\x64\release\bin" >> $GITHUB_PATH
     ################# Dependencies #################
+    - run: ls C:\msys64\mingw64\bin
+    - run: pkg_config --version
+    - run: pkg_config.exe --version
     - run: C:\msys64\mingw64\bin\pkg_config.exe --version
     - name: Check
       run: cargo check
