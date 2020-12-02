@@ -88,6 +88,7 @@ jobs:
       if: runner.os == 'windows'
       run: echo "C:\gtk-build\gtk\x64\release\bin" >> $GITHUB_PATH
     ################# Dependencies #################
+    - run: ls ${{ matrix.config.pkgconfigpath }}
     - name: Check
       run: cargo check
       env:
