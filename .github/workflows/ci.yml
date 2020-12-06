@@ -20,13 +20,15 @@ jobs:
         - os: macOS-latest
           pkgconfig: pkg-config
           pkgconfigpath: /usr/lib/pkgconfig
+          glibcrpath: glib-compile-resources
         - os: ubuntu-latest
           pkgconfig: pkg-config
           pkgconfigpath: /usr/lib/pkgconfig
+          glibcrpath: glib-compile-resources
         - os: windows-2019
           pkgconfig: C:\msys64\mingw64\bin\pkg-config.exe
           pkgconfigpath: C:\gtk-build\gtk\x64\release\lib\pkgconfig
-          # C:\msys64\mingw64\lib\pkgconfig
+          glibcrpath: C:\gtk-build\gtk\x64\release\bin\glib-compile-resources.exe
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -96,6 +98,7 @@ jobs:
         PKG_CONFIG_ALLOW_CROSS: 1
         PKG_CONFIG: ${{ matrix.config.pkgconfig }}
         PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
+        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
     - name: Test
       run: cargo test -- --nocapture
       env:
@@ -103,6 +106,7 @@ jobs:
         PKG_CONFIG_ALLOW_CROSS: 1
         PKG_CONFIG: ${{ matrix.config.pkgconfig }}
         PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
+        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
     - name: Fmt
       run: cargo fmt --all -- --check
       env:
@@ -110,6 +114,7 @@ jobs:
         PKG_CONFIG_ALLOW_CROSS: 1
         PKG_CONFIG: ${{ matrix.config.pkgconfig }}
         PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
+        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
     - name: Clippy
       run: cargo clippy -- -D warnings
       env:
@@ -117,6 +122,7 @@ jobs:
         PKG_CONFIG_ALLOW_CROSS: 1
         PKG_CONFIG: ${{ matrix.config.pkgconfig }}
         PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
+        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
     ################# Windows workarounds #################
     - name: Windows dependencies (make release folder)
       run: mkdir release
