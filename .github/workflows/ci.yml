@@ -61,6 +61,9 @@ jobs:
     - name: Windows dependencies (update msys)
       if: runner.os == 'windows'
       run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syu --noconfirm"
+    - name: Windows dependencies (msys remove cmake)
+      if: runner.os == 'windows'
+      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Rs --noconfirm mingw-w64-x86_64-cmake"
     - name: Windows dependencies (msys)
       if: runner.os == 'windows'
       run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syy --noconfirm mingw-w64-x86_64-pkg-config"
