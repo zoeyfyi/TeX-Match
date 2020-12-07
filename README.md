@@ -8,15 +8,15 @@
 
 <br>
 
-![Continuous integration](https://github.com/mrbenshef/TeX-Match/workflows/Continuous%20integration/badge.svg)
-![Release](https://github.com/mrbenshef/TeX-Match/workflows/Release/badge.svg?branch=release)
+![Continuous integration](https://github.com/zoeyfyi/TeX-Match/workflows/Continuous%20integration/badge.svg)
+![Release](https://github.com/zoeyfyi/TeX-Match/workflows/Release/badge.svg?branch=release)
 [![Crates.io](https://img.shields.io/crates/v/tex-match)](https://crates.io/crates/tex-match)
 [![tex-match](https://snapcraft.io//tex-match/badge.svg)](https://snapcraft.io/tex-match)
 [![Flathub](https://img.shields.io/flathub/v/uk.co.mrbenshef.TeX-Match)](https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match)
 
 ### What is TeX Match?
 
-If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching. TeX Match is based of [detexify](https://detexify.kirelabs.org/classify.html) and is powered by a port of the [detexify classifier](https://github.com/mrbenshef/detexify-rust).
+If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching. TeX Match is based of [detexify](https://detexify.kirelabs.org/classify.html) and is powered by a port of the [detexify classifier](https://github.com/zoeyfyi/detexify-rust).
 
 ### Features
 
@@ -41,12 +41,12 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
     <tr>
         <td>
             <a
-                href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.linux.amd64">tex-match.linux.amd64</a>
+                href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.linux.amd64">tex-match.linux.amd64</a>
             </br>
             <a
-                href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.flatpak">tex-match.flatpak</a>
+                href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.flatpak">tex-match.flatpak</a>
             </br>
-            <a href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.snap">tex-match.snap</a>
+            <a href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.snap">tex-match.snap</a>
             </br>
             <a href="https://snapcraft.io/tex-match"><img
                     src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"
@@ -57,7 +57,7 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
         </td>
         <td>
             <a
-                href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.windows.msi">tex-match.windows.msi</a>
+                href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.windows.msi">tex-match.windows.msi</a>
         </td>
         <td>
             You should really use the <a href="https://gum.co/detexify">detexify Mac app</a>,
@@ -65,12 +65,12 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
             </br>
             but if you <i>really</i> want to:
             </br>
-            <a href="https://github.com/mrbenshef/TeX-Match/releases/latest/download/tex-match.macos">tex-match.macos</a>
+            <a href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.macos">tex-match.macos</a>
         </td>
     </tr>
 </table>
 
-Check out my other project, [Boop-GTK](https://github.com/mrbenshef/Boop-GTK): A scriptable scratchpad for developers.
+Check out my other project, [Boop-GTK](https://github.com/zoeyfyi/Boop-GTK): A scriptable scratchpad for developers.
 
 ### Building
 
