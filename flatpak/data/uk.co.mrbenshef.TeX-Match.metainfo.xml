@@ -10,17 +10,24 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/screenshots/light.png</image>
+      <image>https://raw.githubusercontent.com/zoeyfyi/TeX-Match/trunk/screenshots/light.png</image>
       <caption>Main Window</caption>
     </screenshot>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/mrbenshef/TeX-Match/trunk/screenshots/dark.png</image>
+      <image>https://raw.githubusercontent.com/zoeyfyi/TeX-Match/trunk/screenshots/dark.png</image>
       <caption>Main Window (Adwaita-Dark)</caption>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://tex-match.mrbenshef.co.uk/</url>
+  <url type="homepage">https://tex-match.zoey.fyi/</url>
   <content_rating type="oars-1.0" />
   <releases>
+    <release version="1.1.1" date="2020-12-07">
+      <description>
+        <ul>
+          <li>Update dependencies</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2020-11-11">
       <description>
         <ul>

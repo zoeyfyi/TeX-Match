@@ -1,12 +1,12 @@
 [package]
 name = "tex-match"
-version = "1.1.0"
-authors = ["Ben Sheffield <me@mrbenshef.co.uk>"]
+version = "1.1.1"
+authors = ["Zoey Sheffield <me@zoey.fyi>"]
 edition = "2018"
 description = """Search through over 1000 different LaTeX symbols by sketching"""
 license = "MIT"
-homepage = "https://tex-match.mrbenshef.co.uk"
-repository = "https://github.com/mrbenshef/tex-match/"
+homepage = "https://tex-match.zoey.fyi"
+repository = "https://github.com/zoeyfyi/tex-match/"
 keywords = ["gtk", "computer-vision", "linux", "latex", "tex"]
 categories = ["computer-vision"]
 exclude = [
@@ -33,7 +33,7 @@ gladis_proc_macro = "0.4.1"
 shrinkwraprs = "0.3.0"
 # Logging
 log = "0.4.11"
-env_logger = "0.8.1"
+env_logger = "0.8.2"
 # TeX classification
 detexify = "0.3.0"
 # Misc utils
