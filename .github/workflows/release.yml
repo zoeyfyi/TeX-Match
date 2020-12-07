@@ -58,14 +58,15 @@ jobs:
           target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     ################# Dependencies #################
+    - name: Windows dependencies (update msys)
+      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syu --noconfirm"
+    - name: Windows dependencies (msys remove cmake)
+      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Rs --noconfirm mingw-w64-x86_64-cmake"
     - name: Windows dependencies (msys)
-      if: runner.os == 'windows'
       run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syy --noconfirm mingw-w64-x86_64-pkg-config mingw-w64-x86_64-adwaita-icon-theme"
     - name: Windows dependencies (add msys to path)
-      if: runner.os == 'windows'
       run: echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
     - name: Windows dependencies (cache gvsbuild)
-      if: runner.os == 'windows'
       uses: actions/cache@v2
       id: cache
       with:
@@ -96,6 +97,12 @@ jobs:
     # build installer
     - name: build
       run: cargo wix -v --nocapture -o tex-match.windows.msi
+      env:
+        GTK_LIB_DIR: C:\msys64\mingw64\bin
+        PKG_CONFIG_ALLOW_CROSS: 1
+        PKG_CONFIG: C:\msys64\mingw64\bin\pkg-config.exe
+        PKG_CONFIG_PATH: C:\gtk-build\gtk\x64\release\lib\pkgconfig
+        GLIB_COMPILE_RESOURCES: C:\gtk-build\gtk\x64\release\bin\glib-compile-resources.exe
     # upload
     - uses: actions/upload-artifact@v2.2.1
       with:
