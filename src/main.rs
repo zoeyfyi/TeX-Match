@@ -57,7 +57,7 @@ enum ListItem<'a> {
 fn main() {
     env_logger::init();
 
-    let application = Application::new(Some("uk.co.mrbenshef.TeX-Match"), Default::default())
+    let application = Application::new(Some("fyi.zoey.TeX-Match"), Default::default())
         .expect("failed to initialize GTK application");
 
     application.connect_activate(move |application| {
@@ -101,9 +101,9 @@ fn main() {
 
         // add embedeed icons to theme
         let icon_theme = gtk::IconTheme::get_default().expect("failed to get default icon theme");
-        icon_theme.add_resource_path("/uk/co/mrbenshef/TeX-Match/icons");
+        icon_theme.add_resource_path("/fyi/zoey/TeX-Match/icons");
 
-        let app: App = App::from_resource("/uk/co/mrbenshef/TeX-Match/app.glade")
+        let app: App = App::from_resource("/fyi/zoey/TeX-Match/app.glade")
             .unwrap_or_else(|e| panic!("failed to load app.glade: {}", e));
         app.set_application(Some(application));
 

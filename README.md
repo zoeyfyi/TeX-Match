@@ -12,7 +12,7 @@
 ![Release](https://github.com/zoeyfyi/TeX-Match/workflows/Release/badge.svg?branch=release)
 [![Crates.io](https://img.shields.io/crates/v/tex-match)](https://crates.io/crates/tex-match)
 [![tex-match](https://snapcraft.io//tex-match/badge.svg)](https://snapcraft.io/tex-match)
-[![Flathub](https://img.shields.io/flathub/v/uk.co.mrbenshef.TeX-Match)](https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match)
+[![Flathub](https://img.shields.io/flathub/v/fyi.zoey.TeX-Match)](https://flathub.org/apps/details/fyi.zoey.TeX-Match)
 
 ### What is TeX Match?
 
@@ -52,7 +52,7 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
                     src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"
                     alt="Get it from the Snap Store"></a>
             </br>
-            <a href="https://flathub.org/apps/details/uk.co.mrbenshef.TeX-Match"><img width='190'
+            <a href="https://flathub.org/apps/details/fyi.zoey.TeX-Match"><img width='190'
                     alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'></a>
         </td>
         <td>
@@ -100,8 +100,8 @@ sudo flatpak install -y flathub org.freedesktop.Platform//20.08 org.freedesktop.
 wget https://github.com/flatpak/flatpak-builder/releases/download/1.0.10/flatpak-builder-1.0.10.tar.xz && tar -xvf flatpak-builder-1.0.10.tar.xz && cd flatpak-builder-1.0.10 && ./configure --disable-documentation && make && sudo make install
 sudo apt-get install python3-toml
 bash flatpak/gen-sources.sh
-flatpak-builder --repo=repo build-dir flatpak/uk.co.mrbenshef.TeX-Match.json
-flatpak build-bundle ./repo tex-match.flatpak uk.co.mrbenshef.TeX-Match
+flatpak-builder --repo=repo build-dir flatpak/fyi.zoey.TeX-Match.json
+flatpak build-bundle ./repo tex-match.flatpak fyi.zoey.TeX-Match
 ```
 
 #### MacOS
