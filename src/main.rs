@@ -99,7 +99,7 @@ fn main() {
         let resource_data = glib::Bytes::from(&resource_bytes[..]);
         gio::resources_register(&gio::Resource::from_data(&resource_data).unwrap());
 
-        // add embedeed icons to theme
+        // add embedded icons to theme
         let icon_theme = gtk::IconTheme::get_default().expect("failed to get default icon theme");
         icon_theme.add_resource_path("/fyi/zoey/TeX-Match/icons");
 
@@ -109,13 +109,6 @@ fn main() {
 
         let app_state = Arc::new(RwLock::new(AppState::default()));
         let notification_source_id: Arc<RwLock<Option<SourceId>>> = Arc::new(RwLock::new(None)); // SourceId doesnt implement clone, so must be seperate from AppState
-
-        // add logo to about dialog
-        app.about_dialog.set_logo(
-            gdk_pixbuf::Pixbuf::from_resource("/uk/co/mrbenshef/TeX-Match/TeX-Match.png")
-                .ok()
-                .as_ref(),
-        );
 
         // setup symbols store
         {
