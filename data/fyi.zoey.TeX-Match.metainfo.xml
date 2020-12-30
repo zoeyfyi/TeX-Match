@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>fyi.zoey.TeX-Match</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>TeX Match</name>
+  <summary>Find LaTeX symbols by sketching</summary>
+  <description>
+    <p>If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/zoeyfyi/TeX-Match/trunk/screenshots/light.png</image>
+      <caption>Main Window</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/zoeyfyi/TeX-Match/trunk/screenshots/dark.png</image>
+      <caption>Main Window (Adwaita-Dark)</caption>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://tex-match.zoey.fyi/</url>
+  <content_rating type="oars-1.0" />
+  <releases>
+    <release version="1.1.1" date="2020-12-07">
+      <description>
+        <ul>
+          <li>Update dependencies</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.0" date="2020-11-11">
+      <description>
+        <ul>
+          <li>New icon (by Tobias Bernard)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.1" date="2020-09-30">
+      <description>
+        <p>Remove test notification</p>
+      </description>
+    </release>
+    <release version="1.0.0" date="2020-09-19">
+      <description>
+        <p>New icon</p>
+        <p>About dialog with basic application infomation</p>
+        <p>Display's a notification when clicking on a symbol to copy</p>
+      </description>
+    </release>
+    <release version="0.1.0" date="2020-09-04">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
+  <kudos>
+    <!--
+    GNOME Software kudos:
+    https://gitlab.gnome.org/GNOME/gnome-software/blob/master/doc/kudos.md
+    -->
+    <kudo>ModernToolkit</kudo>
+    <kudo>HiDpiIcon</kudo>
+  </kudos>
+  <developer_name>Zoey Sheffield</developer_name>
+  <update_contact>me@zoey.fyi</update_contact>
+  <provides>
+    <!-- Oh well -->
+    <id>uk.co.mrbenshef.TeX-Match</id>
+  </provides>
+  <launchable type="desktop-id">fyi.zoey.TeX-Match.desktop</launchable>
+</component>
