@@ -151,6 +151,7 @@ jobs:
     - uses: snapcore/action-build@v1
       id: snapcraft
     - uses: snapcore/action-publish@v1
+      continue-on-error: true
       if: github.event_name != 'pull_request'
       with:
         store_login: ${{ secrets.snapcraft_token }}
