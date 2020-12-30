@@ -57,7 +57,7 @@ enum ListItem<'a> {
 fn main() {
     env_logger::init();
 
-    let application = Application::new(Some("uk.co.mrbenshef.TeX-Match"), Default::default())
+    let application = Application::new(Some("fyi.zoey.TeX-Match"), Default::default())
         .expect("failed to initialize GTK application");
 
     application.connect_activate(move |application| {
@@ -99,23 +99,19 @@ fn main() {
         let resource_data = glib::Bytes::from(&resource_bytes[..]);
         gio::resources_register(&gio::Resource::from_data(&resource_data).unwrap());
 
-        // add embedeed icons to theme
+        // add embedded icons to theme
         let icon_theme = gtk::IconTheme::get_default().expect("failed to get default icon theme");
-        icon_theme.add_resource_path("/uk/co/mrbenshef/TeX-Match/icons");
+        icon_theme.add_resource_path("/fyi/zoey/TeX-Match/icons");
 
-        let app: App = App::from_resource("/uk/co/mrbenshef/TeX-Match/app.glade")
+        let app: App = App::from_resource("/fyi/zoey/TeX-Match/app.glade")
             .unwrap_or_else(|e| panic!("failed to load app.glade: {}", e));
         app.set_application(Some(application));
 
+        app.about_dialog
+            .set_version(Some(env!("CARGO_PKG_VERSION")));
+
         let app_state = Arc::new(RwLock::new(AppState::default()));
         let notification_source_id: Arc<RwLock<Option<SourceId>>> = Arc::new(RwLock::new(None)); // SourceId doesnt implement clone, so must be seperate from AppState
-
-        // add logo to about dialog
-        app.about_dialog.set_logo(
-            gdk_pixbuf::Pixbuf::from_resource("/uk/co/mrbenshef/TeX-Match/TeX-Match.png")
-                .ok()
-                .as_ref(),
-        );
 
         // setup symbols store
         {

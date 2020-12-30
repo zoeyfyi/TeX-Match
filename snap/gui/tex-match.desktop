@@ -6,5 +6,5 @@ Exec=tex-match
 Terminal=false
 Categories=Utility;GTK;
 Keywords=GTK;Tools;
-Icon=uk.co.mrbenshef.TeX-Match
+Icon=${SNAP}/meta/gui/tex-match.svg
 StartupNotify=true
