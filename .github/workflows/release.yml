@@ -179,7 +179,7 @@ jobs:
     - uses: bilelmoussaoui/flatpak-github-actions@v2
       with:
         bundle: "tex-match.flatpak"
-        manifest-path: "flatpak/uk.co.mrbenshef.TeX-Match.json"
+        manifest-path: "flatpak/fyi.zoey.TeX-Match.json"
     - uses: actions/upload-artifact@v2.2.1
       with:
         name: tex-match.flatpak
