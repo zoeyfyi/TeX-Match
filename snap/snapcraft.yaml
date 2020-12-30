@@ -1,10 +1,6 @@
 name: tex-match
-title: TeX Match
-version: '1.1.1'
-icon: snap/gui/fyi.zoey.TeX-Match.svg
-summary: Find LaTeX symbols by sketching
-description: |
-  If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching.
+icon: snap/gui/tex-match.svg
+adopt-info: tex-match
 
 base: core18
 confinement: strict
@@ -17,6 +13,8 @@ parts:
   tex-match:
     plugin: rust
     source: .
+    parse-info:
+      - data/fyi.zoey.TeX-Match.metainfo.xml
 
 slots:
   dbus-daemon:
@@ -29,10 +27,10 @@ apps:
     command: bin/tex-match
     extensions: [gnome-3-34]
     plugs:
-    - desktop
-    - desktop-legacy
-    - wayland
-    - unity7
+      - desktop
+      - desktop-legacy
+      - wayland
+      - unity7
     slots:
-    - dbus-daemon
+      - dbus-daemon
     common-id: fyi.zoey.TeX-Match
