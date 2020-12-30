@@ -107,6 +107,9 @@ fn main() {
             .unwrap_or_else(|e| panic!("failed to load app.glade: {}", e));
         app.set_application(Some(application));
 
+        app.about_dialog
+            .set_version(Some(env!("CARGO_PKG_VERSION")));
+
         let app_state = Arc::new(RwLock::new(AppState::default()));
         let notification_source_id: Arc<RwLock<Option<SourceId>>> = Arc::new(RwLock::new(None)); // SourceId doesnt implement clone, so must be seperate from AppState
 
