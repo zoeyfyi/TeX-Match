@@ -1,6 +1,6 @@
 [package]
 name = "tex-match"
-version = "1.1.1"
+version = "1.2.0"
 authors = ["Zoey Sheffield <me@zoey.fyi>"]
 edition = "2018"
 description = """Search through over 1000 different LaTeX symbols by sketching"""

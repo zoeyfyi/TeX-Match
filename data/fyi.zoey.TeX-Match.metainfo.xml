@@ -21,6 +21,13 @@
   <url type="homepage">https://tex-match.zoey.fyi/</url>
   <content_rating type="oars-1.0" />
   <releases>
+    <release version="1.2.0" date="2020-12-30">
+      <description>
+        <ul>
+          <li>App ID changed to fyi.zoey.TeX-Match</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.1" date="2020-12-07">
       <description>
         <ul>
