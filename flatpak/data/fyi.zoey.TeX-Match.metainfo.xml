@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>uk.co.mrbenshef.TeX-Match</id>
+  <id>fyi.zoey.TeX-Match</id>
   <metadata_license>CC0</metadata_license>
   <project_license>MIT</project_license>
   <name>TeX Match</name>
@@ -61,8 +61,11 @@
     <kudo>ModernToolkit</kudo>
     <kudo>HiDpiIcon</kudo>
   </kudos>
-  <developer_name>Ben Sheffield</developer_name>
-  <update_contact>me@mrbenshef.co.uk</update_contact>
-
-  <launchable type="desktop-id">uk.co.mrbenshef.TeX-Match.desktop</launchable>
+  <developer_name>Zoey Sheffield</developer_name>
+  <update_contact>me@zoey.fyi</update_contact>
+  <provides>
+    <!-- Oh well -->
+    <id>uk.co.mrbenshef.TeX-Match</id>
+  </provides>
+  <launchable type="desktop-id">fyi.zoey.TeX-Match.desktop</launchable>
 </component>

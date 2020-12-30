@@ -1,5 +1,5 @@
 {
-    "app-id": "uk.co.mrbenshef.TeX-Match",
+    "app-id": "fyi.zoey.TeX-Match",
     "runtime": "org.freedesktop.Platform",
     "runtime-version": "19.08",
     "sdk": "org.freedesktop.Sdk",
@@ -35,7 +35,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/mrbenshef/TeX-Match/",
+                    "url": "https://github.com/zoeyfyi/TeX-Match/",
                     "commit": "7c07280f4c21f5ff67c960859c96d7eceae516fa"
                 },
                 "generated-sources.json"
