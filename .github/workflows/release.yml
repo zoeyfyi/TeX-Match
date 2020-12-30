@@ -184,9 +184,9 @@ jobs:
     - name: Generate sources
       run: sudo bash flatpak/gen-sources.sh
     - name: Flatpak
-      run: sudo flatpak-builder --repo=repo build-dir flatpak/uk.co.mrbenshef.TeX-Match.json
+      run: sudo flatpak-builder --repo=repo build-dir flatpak/fyi.zoey.TeX-Match.json
     - name: Flatpak build bundle
-      run: flatpak build-bundle ./repo tex-match.flatpak uk.co.mrbenshef.TeX-Match
+      run: flatpak build-bundle ./repo tex-match.flatpak fyi.zoey.TeX-Match
     - uses: actions/upload-artifact@v2.2.1
       with:
         name: tex-match.flatpak

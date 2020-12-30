@@ -3,7 +3,7 @@ use std::{env, fs, io, path::Path, process::Command};
 
 const XML_HEADER: &str = r#"<?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-    <gresource prefix="/uk/co/mrbenshef/TeX-Match">
+    <gresource prefix="/fyi/zoey/TeX-Match">
 "#;
 
 const XML_FOOTER: &str = r#"    </gresource>
@@ -19,7 +19,7 @@ fn add_files(xml: &mut String, folder: &str) {
             continue;
         }
 
-        if path.file_type().unwrap().is_file() {
+        if path.path().is_file() {
             xml.push_str(&format!(
                 "\t\t<file>{}</file>\n",
                 path.path()
@@ -28,7 +28,7 @@ fn add_files(xml: &mut String, folder: &str) {
                     .replace("\\", "/")
                     .trim_start_matches("resources/")
             ));
-        } else if path.file_type().unwrap().is_dir() {
+        } else if path.path().is_dir() {
             add_files(xml, &path.path().display().to_string());
         } else {
             panic!("expected file or folder");

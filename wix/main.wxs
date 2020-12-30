@@ -31,9 +31,9 @@
 
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 
-  <Product Id='*' Name='TeX-Match' UpgradeCode='6BD067A4-2405-40F8-9203-1553C777F753' Manufacturer='Ben Sheffield' Language='1033' Codepage='1252' Version='$(var.Version)'>
+  <Product Id='*' Name='TeX-Match' UpgradeCode='6BD067A4-2405-40F8-9203-1553C777F753' Manufacturer='Zoey Sheffield' Language='1033' Codepage='1252' Version='$(var.Version)'>
 
-    <Package Id='*' Keywords='Installer' Description='A desktop version of detexify' Manufacturer='Ben Sheffield' InstallerVersion='450' Languages='1033' Compressed='yes' InstallScope='perMachine' SummaryCodepage='1252' Platform='$(var.Platform)'/>
+    <Package Id='*' Keywords='Installer' Description='A desktop version of detexify' Manufacturer='Zoey Sheffield' InstallerVersion='450' Languages='1033' Compressed='yes' InstallScope='perMachine' SummaryCodepage='1252' Platform='$(var.Platform)'/>
 
     <MajorUpgrade Schedule='afterInstallInitialize' DowngradeErrorMessage='A newer version of [ProductName] is already installed. Setup will now exit.'/>
 
@@ -398,7 +398,7 @@
     <!--<Icon Id='ProductICO' SourceFile='wix\Product.ico'/>-->
     <!--<Property Id='ARPPRODUCTICON' Value='ProductICO' />-->
 
-    <Property Id='ARPHELPLINK' Value='https://tex-match.mrbenshef.co.uk'/>
+    <Property Id='ARPHELPLINK' Value='https://tex-match.zoey.fyi'/>
     <Property Id="ARPPRODUCTICON" Value="AppIcon" />
 
     <UI>
