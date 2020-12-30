@@ -24,6 +24,7 @@
     <release version="1.2.0" date="2020-12-30">
       <description>
         <ul>
+          <li>Add version number to the about dialog</li>
           <li>App ID changed to fyi.zoey.TeX-Match</li>
         </ul>
       </description>
