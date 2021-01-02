@@ -22,6 +22,8 @@
 [![Crates.io](https://img.shields.io/crates/v/tex-match)](https://crates.io/crates/tex-match)
 [![tex-match](https://snapcraft.io//tex-match/badge.svg)](https://snapcraft.io/tex-match)
 [![Flathub](https://img.shields.io/flathub/v/fyi.zoey.TeX-Match)](https://flathub.org/apps/details/fyi.zoey.TeX-Match)
+![AUR version](https://img.shields.io/aur/version/tex-match?label=AUR%20tex-match)
+![AUR version](https://img.shields.io/aur/version/tex-match-bin?label=AUR%20tex-match-bin)
 
 ### What is TeX Match?
 
