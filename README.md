@@ -1,10 +1,19 @@
-<h1 align="center">TeX Match</h1>
-
 <p align="center">
   <img src="TeX-Match.gif" width="660px">
 </p>
 
-<h2 align="center">A desktop version of <a href="https://detexify.kirelabs.org/classify.html">detexify</a></h2>
+<div align="center">
+  <img width="128px" src="data/fyi.zoey.TeX-Match.svg" >
+</div>
+
+<h1 align="center">TeX Match</h1>
+<h3 align="center">Find LaTeX symbols by sketching. A desktop version of <a href="https://detexify.kirelabs.org/classify.html">detexify</a></h3>
+<p align="center"><i>Also checkout <a href="https://github.com/zoeyfyi/Boop-GTK">Boop-GTK</a>: A scriptable scratchpad for developers</i></p>
+
+
+<p align="center">
+  <a href="#what-is-tex-match">What is TeX-Match?</a> • <a href="#features">Features</a> • <a href="#downloads">Downloads</a> • <a href="#screenshots">Screenshots</a> • <a href="#building">Building</a>
+</p>
 
 <br>
 
@@ -16,7 +25,7 @@
 
 ### What is TeX Match?
 
-If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching. TeX Match is based of [detexify](https://detexify.kirelabs.org/classify.html) and is powered by a port of the [detexify classifier](https://github.com/zoeyfyi/detexify-rust).
+If you work with LaTeX, you know its difficult to memorize the names of all the symbols. TeX Match allows you to search through over 1000 different LaTeX symbols by sketching. Once you found the desired symbol you can copy it to the clipboard by clicking on the entry. TeX Match is based of [detexify](https://detexify.kirelabs.org/classify.html) and is powered by a port of the [detexify classifier](https://github.com/zoeyfyi/detexify-rust).
 
 ### Features
 
@@ -24,53 +33,24 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
 - Completely offline
 - Crossplatform
 
+### Downloads
+
+| Platform | Format | Link | 
+| -------- | ------ | ---- | 
+| Linux | Binary | [tex-match.linux.amd64](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.linux.amd64) | 
+| | Flatpak | [tex-match.flatpak](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.flatpak) | 
+| | Snap | [tex-match.snap](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.snap) | 
+| | Snap Store | [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/tex-match) | 
+| | Flathub | [<img width='190' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'>](https://flathub.org/apps/details/fyi.zoey.TeX-Match) | 
+| Windows | Installer | [tex-match.windows.msi](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.windows.msi) | 
+| MacOS | Binary | You should really use the [detexify Mac app](https://gum.co/detexify), but if you _really__ want to: [tex-match.macos](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.macos) |
+
 ### Screenshots
 
 | Adwaita | Adwaita-Dark |
 | :---: | :---: |
 | ![light](screenshots/light.png) | ![dark](screenshots/dark.png) |
 
-### Get Tex Match
-
-<table width="100%">
-    <tr>
-        <th width="33.333%">Linux</th>
-        <th width="33.333%">Windows</th>
-        <th width="33.333%">MacOS</th>
-    </tr>
-    <tr>
-        <td>
-            <a
-                href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.linux.amd64">tex-match.linux.amd64</a>
-            </br>
-            <a
-                href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.flatpak">tex-match.flatpak</a>
-            </br>
-            <a href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.snap">tex-match.snap</a>
-            </br>
-            <a href="https://snapcraft.io/tex-match"><img
-                    src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"
-                    alt="Get it from the Snap Store"></a>
-            </br>
-            <a href="https://flathub.org/apps/details/fyi.zoey.TeX-Match"><img width='190'
-                    alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'></a>
-        </td>
-        <td>
-            <a
-                href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.windows.msi">tex-match.windows.msi</a>
-        </td>
-        <td>
-            You should really use the <a href="https://gum.co/detexify">detexify Mac app</a>,
-            </br>
-            </br>
-            but if you <i>really</i> want to:
-            </br>
-            <a href="https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.macos">tex-match.macos</a>
-        </td>
-    </tr>
-</table>
-
-Check out my other project, [Boop-GTK](https://github.com/zoeyfyi/Boop-GTK): A scriptable scratchpad for developers.
 
 ### Building
 
