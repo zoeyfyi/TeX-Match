@@ -40,6 +40,7 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
 | Linux | Binary | [tex-match.linux.amd64](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.linux.amd64) | 
 | | Flatpak | [tex-match.flatpak](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.flatpak) | 
 | | Snap | [tex-match.snap](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.snap) | 
+| | AUR | [`tex-match`](https://aur.archlinux.org/packages/tex-match/) </br> [`tex-match-bin`](https://aur.archlinux.org/packages/tex-match-bin/)  |
 | | Snap Store | [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/tex-match) | 
 | | Flathub | [<img width='190' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'>](https://flathub.org/apps/details/fyi.zoey.TeX-Match) | 
 | Windows | Installer | [tex-match.windows.msi](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.windows.msi) | 
