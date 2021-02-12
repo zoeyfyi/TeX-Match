@@ -33,7 +33,7 @@ gladis_proc_macro = "0.4.1"
 shrinkwraprs = "0.3.0"
 # Logging
 log = "0.4.14"
-env_logger = "0.8.2"
+env_logger = "0.8.3"
 # TeX classification
 detexify = "0.3.0"
 # Misc utils
