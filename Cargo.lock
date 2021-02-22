@@ -902,9 +902,9 @@ checksum = "cc47a29ce97772ca5c927f75bac34866b16d64e07f330c3248e2d7226623901b"
 
 [[package]]
 name = "single_value_channel"
-version = "1.2.1"
+version = "1.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fcbf0d4b0fde6c869e577fd41c50bd3da7179b61aafdd049a3c068a3fe00ba57"
+checksum = "e5dac3e54a6fb2c64489607c294b41d4a1cef34c58e05e6bc4050fb4831588b6"
 
 [[package]]
 name = "siphasher"
