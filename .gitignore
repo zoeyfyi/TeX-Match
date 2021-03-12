@@ -1,8 +1,8 @@
-/target
 *~
-build-dir
-.flatpak-builder
-generated-sources.json
-repo
-tex-match.flatpak
-*.snap
+TeX-Match-Linux/target
+TeX-Match-Linux/build-dir
+TeX-Match-Linux/.flatpak-builder
+TeX-Match-Linux/generated-sources.json
+TeX-Match-Linux/repo
+TeX-Match-Linux/tex-match.flatpak
+TeX-Match-Linux/*.snap
