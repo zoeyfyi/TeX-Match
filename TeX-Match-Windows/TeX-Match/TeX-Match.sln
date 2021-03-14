@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeX-Match", "TeX-Match.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeX-Match.Core", "..\TeX-Match.Core\TeX-Match.Core.csproj", "{1750451C-1FA8-4F18-AB2B-E8BB5E1CFD17}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8445004E-4542-4AAA-B207-254D25B152AF}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\submodules\detexify-rust\target\release\detexify.dll = ..\..\submodules\detexify-rust\target\release\detexify.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

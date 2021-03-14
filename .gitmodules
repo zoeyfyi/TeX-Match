@@ -7,3 +7,6 @@
 [submodule "submodules/gvsbuild"]
 	path = submodules/gvsbuild
 	url = https://github.com/wingtk/gvsbuild
+[submodule "submodules/detexify-rust"]
+	path = submodules/detexify-rust
+	url = https://github.com/zoeyfyi/detexify-rust
