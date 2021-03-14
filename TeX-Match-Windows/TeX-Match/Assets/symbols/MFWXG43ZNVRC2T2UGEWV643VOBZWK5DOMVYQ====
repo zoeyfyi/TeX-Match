@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   viewBox="0 0 6.09375 8.6718748"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="temp.svg">
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview19" />
+  <defs
+     id="defs10">
+    <g
+       id="g8">
+      <symbol
+         overflow="visible"
+         id="glyph0-0">
+        <path
+           style="stroke:none"
+           d=""
+           id="path2" />
+      </symbol>
+      <symbol
+         overflow="visible"
+         id="glyph0-1">
+        <path
+           style="stroke:none"
+           d="m 3.828125,-5.9375 c 1.609375,0 2.6875,1.171875 2.6875,2.484375 0,1.34375 -1.125,2.484375 -2.671875,2.484375 H 1.171875 c -0.171875,0 -0.34375,0 -0.34375,0.203125 C 0.828125,-0.5625 1,-0.5625 1.171875,-0.5625 H 3.875 c 1.671875,0 3.046875,-1.265625 3.046875,-2.890625 0,-1.625 -1.375,-2.890625 -3.0625,-2.890625 h -2.6875 c -0.171875,0 -0.34375,0 -0.34375,0.203125 C 0.828125,-5.9375 1,-5.9375 1.171875,-5.9375 Z M 6.375,1.359375 c 0.171875,0 0.34375,0 0.34375,-0.1875 C 6.71875,0.96875 6.546875,0.96875 6.375,0.96875 H 4.328125 L 4.8125,0.40625 C 4.90625,0.3125 4.9375,0.28125 4.9375,0.203125 4.9375,0.15625 4.890625,0 4.734375,0 4.671875,0 4.65625,0.015625 4.484375,0.1875 4.171875,0.515625 4.171875,0.53125 3.78125,0.96875 H 1.171875 c -0.171875,0 -0.34375,0 -0.34375,0.203125 0,0.1875 0.171875,0.1875 0.34375,0.1875 h 2.25 c -0.1875,0.21875 -0.40625,0.4375 -0.484375,0.5625 -0.09375,0.109375 -0.125,0.140625 -0.125,0.21875 0,0.078125 0.0625,0.1875 0.203125,0.1875 0.078125,0 0.09375,-0.015625 0.25,-0.171875 0.3125,-0.34375 0.3125,-0.359375 0.6875,-0.796875 z m 0,0"
+           id="path5" />
+      </symbol>
+    </g>
+  </defs>
+  <g
+     id="surface1"
+     transform="translate(-149.54013,-128.42125)">
+    <g
+       style="fill:#000000;fill-opacity:1"
+       id="g14">
+      <use
+         xlink:href="#glyph0-1"
+         x="148.71201"
+         y="134.765"
+         id="use12"
+         width="100%"
+         height="100%" />
+    </g>
+  </g>
+</svg>

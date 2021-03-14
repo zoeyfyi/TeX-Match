@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   viewBox="0 0 5.546875 6.1874999"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="temp.svg">
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview19" />
+  <defs
+     id="defs10">
+    <g
+       id="g8">
+      <symbol
+         overflow="visible"
+         id="glyph0-0">
+        <path
+           style="stroke:none"
+           d=""
+           id="path2" />
+      </symbol>
+      <symbol
+         overflow="visible"
+         id="glyph0-1">
+        <path
+           style="stroke:none"
+           d="m 6.09375,-5.609375 c 0,-0.171875 0,-0.359375 -0.203125,-0.359375 -0.203125,0 -0.203125,0.1875 -0.203125,0.359375 V -2 c 0,1.5 -1.625,1.828125 -2.375,1.828125 -0.4375,0 -1.0625,-0.09375 -1.59375,-0.4375 C 0.953125,-1.09375 0.953125,-1.734375 0.953125,-2 v -3.609375 c 0,-0.171875 0,-0.359375 -0.203125,-0.359375 -0.203125,0 -0.203125,0.1875 -0.203125,0.359375 v 3.65625 c 0,1.515625 1.53125,2.171875 2.765625,2.171875 1.296875,0 2.78125,-0.703125 2.78125,-2.15625 z m 0,0"
+           id="path5" />
+      </symbol>
+    </g>
+  </defs>
+  <g
+     id="surface1"
+     transform="translate(-149.25888,-128.79625)">
+    <g
+       style="fill:#000000;fill-opacity:1"
+       id="g14">
+      <use
+         xlink:href="#glyph0-1"
+         x="148.71201"
+         y="134.765"
+         id="use12"
+         width="100%"
+         height="100%" />
+    </g>
+  </g>
+</svg>
