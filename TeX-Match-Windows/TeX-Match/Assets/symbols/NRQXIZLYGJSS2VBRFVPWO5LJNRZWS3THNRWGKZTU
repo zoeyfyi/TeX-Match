@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   viewBox="0 0 2.1875 4.8124999"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="temp.svg">
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview19" />
+  <defs
+     id="defs10">
+    <g
+       id="g8">
+      <symbol
+         overflow="visible"
+         id="glyph0-0">
+        <path
+           style="stroke:none"
+           d=""
+           id="path2" />
+      </symbol>
+      <symbol
+         overflow="visible"
+         id="glyph0-1">
+        <path
+           style="stroke:none"
+           d="m 1.84375,-2.40625 c 0.625,-0.625 1.109375,-1.375 1.421875,-2.1875 0.015625,-0.046875 0.03125,-0.09375 0.03125,-0.125 0,-0.0625 -0.015625,-0.09375 -0.09375,-0.109375 -0.125,0 -0.265625,0.40625 -0.390625,0.59375 C 2.40625,-3.59375 1.890625,-3.046875 1.28125,-2.59375 1.21875,-2.546875 1.109375,-2.5 1.109375,-2.421875 v 0.015625 c 0,0.078125 0.21875,0.1875 0.3125,0.265625 0.625,0.5 1.15625,1.109375 1.53125,1.8125 0.03125,0.03125 0.125,0.3125 0.25,0.3125 h 0.03125 c 0.0625,-0.015625 0.0625,-0.046875 0.0625,-0.09375 0,-0.171875 -0.140625,-0.40625 -0.21875,-0.5625 C 2.875,-1.109375 2.609375,-1.53125 2.296875,-1.90625 2.15625,-2.078125 2.03125,-2.265625 1.84375,-2.40625 Z m 0,0"
+           id="path5" />
+      </symbol>
+    </g>
+  </defs>
+  <g
+     id="surface1"
+     transform="translate(-149.82138,-129.93687)">
+    <g
+       style="fill:#000000;fill-opacity:1"
+       id="g14">
+      <use
+         xlink:href="#glyph0-1"
+         x="148.71201"
+         y="134.765"
+         id="use12"
+         width="100%"
+         height="100%" />
+    </g>
+  </g>
+</svg>

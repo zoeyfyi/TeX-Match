@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   viewBox="0 0 5.546875 8.2187499"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="temp.svg">
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview19" />
+  <defs
+     id="defs10">
+    <g
+       id="g8">
+      <symbol
+         overflow="visible"
+         id="glyph0-0">
+        <path
+           style="stroke:none"
+           d=""
+           id="path2" />
+      </symbol>
+      <symbol
+         overflow="visible"
+         id="glyph0-1">
+        <path
+           style="stroke:none"
+           d="M 4.34375,-1.578125 C 4.078125,-0.671875 3.8125,-0.21875 3.71875,-0.0625 3.328125,0.625 3.125,0.640625 2.78125,0.640625 c -0.171875,0 -0.875,-0.03125 -1.46875,-0.4375 -0.4375,0.03125 -0.796875,0.375 -0.796875,0.484375 0,0.09375 0.6875,0.5 1.609375,0.5 0.71875,0 1.890625,-0.375 2.640625,-2 C 5.03125,-1.375 5.1875,-1.9375 5.21875,-2.0625 5.421875,-2.75 5.625,-3.546875 5.625,-3.59375 c 0,-0.0625 -0.015625,-0.078125 -0.109375,-0.078125 -0.078125,0 -0.25,0.046875 -0.46875,0.1875 -0.21875,0.140625 -0.234375,0.1875 -0.296875,0.4375 -0.109375,0.34375 -0.6875,1.828125 -1.921875,1.828125 -0.96875,0 -1.546875,-0.796875 -1.546875,-1.921875 0,-0.765625 0.3125,-1.796875 0.890625,-2.484375 C 2.4375,-5.953125 2.9375,-6.484375 4.0625,-6.484375 c 0.1875,0 0.46875,0.03125 0.71875,0.109375 0.109375,0.03125 0.359375,0.109375 0.359375,0.4375 0,0.328125 -0.515625,0.96875 -0.5625,1.03125 -0.03125,0.046875 -0.0625,0.078125 -0.0625,0.125 0,0.0625 0.046875,0.0625 0.109375,0.0625 0.296875,0 0.625,-0.265625 0.890625,-0.640625 0.078125,-0.109375 0.46875,-0.65625 0.46875,-1 0,-0.40625 -0.296875,-0.515625 -0.421875,-0.546875 -0.375,-0.125 -0.703125,-0.125 -0.84375,-0.125 -2.25,0 -4.28125,1.984375 -4.28125,4.3125 0,1.015625 0.453125,2.046875 1.734375,2.046875 0.75,0 1.515625,-0.390625 2.171875,-0.90625 z m 0,0"
+           id="path5" />
+      </symbol>
+    </g>
+  </defs>
+  <g
+     id="surface1"
+     transform="translate(-149.14951,-127.73375)">
+    <g
+       style="fill:#000000;fill-opacity:1"
+       id="g14">
+      <use
+         xlink:href="#glyph0-1"
+         x="148.71201"
+         y="134.765"
+         id="use12"
+         width="100%"
+         height="100%" />
+    </g>
+  </g>
+</svg>
