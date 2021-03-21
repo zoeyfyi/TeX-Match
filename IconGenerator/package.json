@@ -1,0 +1,16 @@
+{
+  "name": "icongenerator",
+  "version": "1.0.0",
+  "description": "Generate icons for TeX-Match",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "svgo": "github:strarsis/svgo#dereferenceUses-plugin",
+    "yaml": "^1.10.2"
+  }
+}
