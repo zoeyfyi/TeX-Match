@@ -6,6 +6,10 @@ using Windows.UI.Input.Inking;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using TeX_Match.Core.Detexify;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Xaml;
+using Windows.System;
+using Windows.UI.Core;
 
 namespace TeX_Match.Views
 {
@@ -77,6 +81,27 @@ namespace TeX_Match.Views
         private void ClearButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             DrawingArea.InkPresenter.StrokeContainer.Clear();
+        }
+
+        private void ResultsList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SymbolListItem item = (SymbolListItem) e.ClickedItem;
+            DataPackage dataPackage = new DataPackage();
+
+            string content;
+
+            if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down))
+            {
+                content = item.Package;
+            } else
+            {
+                content = item.Command;
+            }
+
+            dataPackage.SetText(content);
+            Clipboard.SetContent(dataPackage);
+
+            Notification.Show("Copied " + content + " to clipboard", 3000);
         }
     }
 }

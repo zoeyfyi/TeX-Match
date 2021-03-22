@@ -4,50 +4,54 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="300" />
-        </Grid.ColumnDefinitions>
-
-        <Grid>
+    <Grid>
+        <Grid x:Name="ContentArea">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
 
-            <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
-                <InkCanvas Grid.Row="0" Grid.Column="0" x:Name="DrawingArea"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+                    <InkCanvas Grid.Row="0" Grid.Column="0" x:Name="DrawingArea"/>
+                </Grid>
+                <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" x:Name="ClearButton" Content="Clear" Click="ClearButton_Click" />
             </Grid>
-            <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" x:Name="ClearButton" Content="Clear" Click="ClearButton_Click" />
-        </Grid>
 
-        <ListView Grid.Row="0" Grid.Column="1" x:Name="ResultsList">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0, 8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Width="32" Height="32">
-                            <Image.Source>
-                                <SvgImageSource UriSource="{Binding SourceURI}" RasterizePixelWidth="64" RasterizePixelHeight="64" />
-                            </Image.Source>
-                        </Image>
-                        <StackPanel Grid.Column="1" Margin="8">
-                            <TextBlock Text="{Binding Package}"/>
-                            <TextBlock Text="{Binding Command}" FontSize="16" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding ModeAndScore}" FontSize="10"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <ListView Grid.Row="0" Grid.Column="1" x:Name="ResultsList" IsItemClickEnabled="True" SelectionMode="None" ItemClick="ResultsList_ItemClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0, 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Width="32" Height="32">
+                                <Image.Source>
+                                    <SvgImageSource UriSource="{Binding SourceURI}" RasterizePixelWidth="64" RasterizePixelHeight="64" />
+                                </Image.Source>
+                            </Image>
+                            <StackPanel Grid.Column="1" Margin="8">
+                                <TextBlock Text="{Binding Package}"/>
+                                <TextBlock Text="{Binding Command}" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding ModeAndScore}" FontSize="10"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <controls:InAppNotification Name="Notification"/>
     </Grid>
 </Page>
