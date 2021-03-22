@@ -91,7 +91,7 @@ let symbols = await (async function () {
         }
     }
 
-    return symbols.slice(0, 64);
+    return symbols;
 })();
 
 // symbols = symbols.slice(2, 3);
