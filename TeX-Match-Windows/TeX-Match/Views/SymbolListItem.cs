@@ -25,10 +25,8 @@ namespace TeX_Match.Views
         }
 
         public string Command => command;
-        public string Mode
-        {
-            get
-            {
+        public string Mode {
+            get {
                 if (textMode && !mathMode)
                 {
                     return "textmode";
@@ -49,7 +47,18 @@ namespace TeX_Match.Views
         }
         public string Package => string.Format("\\usepackage{{ {0} }}", package);
         public double Score => score;
-        public string ModeAndScore => string.Format("{0} (score: {1:F4})", Mode, Score);
+        public string ModeAndScore {
+            get {
+                if (score == 0.0)
+                {
+                    return Mode;
+                }
+                else
+                {
+                    return string.Format("{0} (score: {1:F4})", Mode, Score);
+                }
+            }
+        }
 
         //private string id => Base32.ToBase32String(Encoding.ASCII.GetBytes(string.Format("{0}-{1}-{2}", package, fontEnc, command.Replace('\\', '_')))).ToLower();
         private string id => Base32.ToBase32String(Encoding.UTF8.GetBytes(string.Format("{0}-{1}-{2}", package, fontEnc, command.Replace('\\', '_')))).ToLower();

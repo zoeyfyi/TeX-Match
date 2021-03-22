@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using TeX_Match.Core.Detexify;
 
 public class Symbol
@@ -12,9 +14,24 @@ public class Symbol
         Ptr = symbol;
     }
 
+    internal unsafe Symbol(uint i) : this(Bindings.symbols_get(i)) { }
+
+    static uint Count()
+    {
+        unsafe { return Bindings.symbols_count(); }
+    }
+
     ~Symbol()
     {
         unsafe { Bindings.symbol_free(Ptr); }
+    }
+  
+    public static IEnumerable All()
+    {
+            for (uint i = 0; i < Symbol.Count(); i++)
+            {
+                yield return new Symbol(i);
+            }
     }
 
     public string Command {

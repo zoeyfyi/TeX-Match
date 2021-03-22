@@ -32,6 +32,11 @@ namespace TeX_Match.Views
             DrawingArea.InkPresenter.StrokesCollected += DrawingCanvas_StrokesCollected;
 
             classifier = new Classifier();
+
+            foreach (Symbol symbol in Symbol.All())
+            {
+                ResultsList.Items.Add(new SymbolListItem(symbol));
+            }
         }
 
         private void DrawingCanvas_StrokesCollected(InkPresenter sender, InkStrokesCollectedEventArgs args)
