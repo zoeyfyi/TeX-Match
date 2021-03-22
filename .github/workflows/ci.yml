@@ -77,6 +77,8 @@ jobs:
           submodules: "recursive"
       - run: cd TeX-Match-Linux
       - uses: snapcore/action-build@v1
+        with:
+          path: ./TeX-Match-Linux
 
   flatpak:
     runs-on: ubuntu-latest
