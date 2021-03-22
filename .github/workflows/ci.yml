@@ -29,7 +29,7 @@ jobs:
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
     - name: Build solution
-      run: MSBuild TeX-Match/TeX-Match.sln /t:Rebuild /p:Configuration=Release
+      run: MSBuild TeX-Match/TeX-Match.sln /restore /t:Build /p:Configuration=Release
       working-directory: ./TeX-Match-Windows
 
   linux:
