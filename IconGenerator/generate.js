@@ -95,7 +95,7 @@ let symbols = await (async function () {
     return symbols;
 })();
 
-symbols = symbols.slice(0, 1);
+// symbols = symbols.slice(0, 1);
 
 spinner.succeed(`Found ${symbols.length} symbols`);
 

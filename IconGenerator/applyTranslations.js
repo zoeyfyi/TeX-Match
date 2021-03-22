@@ -26,7 +26,7 @@ const fn = function (document) {
 
         const coords = node.attributes.transform.match(/translate\((-?[0-9]*\.[0-9]*) (-?[0-9]*\.[0-9]*)\)/)
 
-        if (coords.length !== 3)
+        if (coords === null || coords.length !== 3)
             return;
 
         const xTrans = parseFloat(coords[1]);
