@@ -35,8 +35,12 @@
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Width="32" Height="32"/>
-                        <StackPanel Grid.Column="1">
+                        <Image Grid.Column="0" Width="32" Height="32">
+                            <Image.Source>
+                                <SvgImageSource UriSource="{Binding SourceURI}" RasterizePixelWidth="64" RasterizePixelHeight="64" />
+                            </Image.Source>
+                        </Image>
+                        <StackPanel Grid.Column="1" Margin="8">
                             <TextBlock Text="{Binding Package}"/>
                             <TextBlock Text="{Binding Command}" FontSize="16" FontWeight="Bold"/>
                             <TextBlock Text="{Binding ModeAndScore}" FontSize="10"/>

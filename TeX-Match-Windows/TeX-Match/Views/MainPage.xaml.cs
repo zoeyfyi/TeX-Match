@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Windows.Foundation;
 using Windows.UI.Input.Inking;
 using Windows.UI.ViewManagement;
@@ -14,6 +16,7 @@ namespace TeX_Match.Views
         private readonly bool textMode;
         private readonly bool mathMode;
         private readonly string package;
+        private readonly string fontEnc;
         private readonly double score;
 
         internal SymbolListItem(Symbol symbol) : this(symbol, 0.0) { }
@@ -24,6 +27,7 @@ namespace TeX_Match.Views
             this.textMode = symbol.TextMode;
             this.mathMode = symbol.MathMode;
             this.package = symbol.Package;
+            this.fontEnc = symbol.FontEncoding;
             this.score = score;
         }
 
@@ -53,6 +57,10 @@ namespace TeX_Match.Views
         public string Package => string.Format("\\usepackage{{ {0} }}", package);
         public double Score => score;
         public string ModeAndScore => string.Format("{0} (score: {1:F4})", Mode, Score);
+
+        //private string id => Base32.ToBase32String(Encoding.ASCII.GetBytes(string.Format("{0}-{1}-{2}", package, fontEnc, command.Replace('\\', '_')))).ToLower();
+        private string id => Base32.ToBase32String(Encoding.UTF8.GetBytes(string.Format("{0}-{1}-{2}", package, fontEnc, command.Replace('\\', '_')))).ToLower();
+        public string SourceURI => string.Format("ms-appx:///Assets/symbols/{0}.svg", id);
     }
 
     public sealed partial class MainPage : Page, INotifyPropertyChanged
@@ -74,6 +82,8 @@ namespace TeX_Match.Views
             DrawingArea.InkPresenter.StrokesCollected += DrawingCanvas_StrokesCollected;
 
             classifier = new Classifier();
+
+            //Debug.WriteLine("exgq6ybkf5pjukum64pnyxv1edwprvvucnq6et8 => " + Encoding.ASCII.GetString(Base32.FromBase32String("exgq6ybkf5pjukum64pnyxv1edwprvvucnq6et8")));
         }
 
         private void DrawingCanvas_StrokesCollected(InkPresenter sender, InkStrokesCollectedEventArgs args)
@@ -101,7 +111,7 @@ namespace TeX_Match.Views
 
             foreach(Score score in scores)
             {
-                ResultsList.Items.Add(new SymbolListItem(score.Symbol));
+                ResultsList.Items.Add(new SymbolListItem(score.Symbol, score.Value));
             }
         }
 
