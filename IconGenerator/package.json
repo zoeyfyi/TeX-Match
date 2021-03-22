@@ -5,12 +5,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "svgo --config config.cjs test.svg"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "svgo": "github:strarsis/svgo#dereferenceUses-plugin",
+    "ora": "^5.4.0",
+    "svgo": "github:zoeyfyi/svgo#dereferenceUses-plugin-fix",
+    "tmp-promise": "^3.0.2",
     "yaml": "^1.10.2"
   }
 }
