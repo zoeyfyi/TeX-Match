@@ -102,9 +102,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Dependencies
         run: sudo apt-get install -y appstream-util desktop-file-utils
-      - name: Validate data/fyi.zoey.Boop-GTK.metainfo.xml
+      - name: Validate data/fyi.zoey.TeX-Match.metainfo.xml
         run: appstream-util validate-relax data/fyi.zoey.Boop-GTK.metainfo.xml
         working-directory: ./TeX-Match-Linux
-      - name: Validate data/fyi.zoey.Boop-GTK.desktop
+      - name: Validate data/fyi.zoey.TeX-Match.desktop
         run: desktop-file-validate data/fyi.zoey.Boop-GTK.desktop
         working-directory: ./TeX-Match-Linux
