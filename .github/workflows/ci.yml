@@ -25,12 +25,12 @@ jobs:
         rust-version: nightly
     - name: Compile detextify
       run: cargo build --release
-      working-directory: submodules/detexify-rust
+      working-directory: ./submodules/detexify-rust
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
     - name: Build solution
       run: MSBuild TeX-Match/TeX-Match.sln /t:Rebuild /p:Configuration=Release
-      working-directory: TeX-Match-Windows
+      working-directory: ./TeX-Match-Windows
 
   linux:
     name: Linux
@@ -57,16 +57,16 @@ jobs:
       run: sudo apt-get update -y && sudo apt-get install -y libgtk-3-dev libgtksourceview-3.0-dev
     - name: Check
       run: cargo check
-      working-directory: TeX-Match-Linux
+      working-directory: ./TeX-Match-Linux
     - name: Test
       run: cargo test -- --nocapture
-      working-directory: TeX-Match-Linux
+      working-directory: ./TeX-Match-Linux
     - name: Fmt
       run: cargo fmt --all -- --check
-      working-directory: TeX-Match-Linux
+      working-directory: ./TeX-Match-Linux
     - name: Clippy
       run: cargo clippy -- -D warnings
-      working-directory: TeX-Match-Linux
+      working-directory: ./TeX-Match-Linux
 
   snap:
     name: snap
@@ -91,7 +91,7 @@ jobs:
         run: sudo dnf install -y python3-toml
       - name: Generate sources
         run: bash flatpak/gen-sources.sh
-        working-directory: TeX-Match-Linux
+        working-directory: ./TeX-Match-Linux
       - uses: bilelmoussaoui/flatpak-github-actions@v2
         with:
           manifest-path: "TeX-Match-Linux/flatpak/fyi.zoey.Boop-GTK.json"
@@ -104,7 +104,7 @@ jobs:
         run: sudo apt-get install -y appstream-util desktop-file-utils
       - name: Validate data/fyi.zoey.Boop-GTK.metainfo.xml
         run: appstream-util validate-relax data/fyi.zoey.Boop-GTK.metainfo.xml
-        working-directory: TeX-Match-Linux
+        working-directory: ./TeX-Match-Linux
       - name: Validate data/fyi.zoey.Boop-GTK.desktop
         run: desktop-file-validate data/fyi.zoey.Boop-GTK.desktop
-        working-directory: TeX-Match-Linux
+        working-directory: ./TeX-Match-Linux
