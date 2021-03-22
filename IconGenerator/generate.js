@@ -9,6 +9,7 @@ import asyncPool from "tiny-async-pool";
 import os from 'os';
 import { dirname } from 'path';
 import svgo from 'svgo';
+import applyTranslations from './applyTranslations.js';
 
 const CPUS = os.cpus().length;
 console.log(`Running on ${CPUS} threads`)
@@ -94,7 +95,7 @@ let symbols = await (async function () {
     return symbols;
 })();
 
-// symbols = symbols.slice(2, 3);
+symbols = symbols.slice(0, 1);
 
 spinner.succeed(`Found ${symbols.length} symbols`);
 
@@ -200,24 +201,27 @@ spinner.succeed(`Cropped SVGs`);
 
 */
 
-// spinner = ora('Resizing SVGs').start();
+spinner = ora('Resizing SVGs').start();
 
-// const resizeSVG = async file => {
-//     const handle = await fs.open(file, "r+");
+const resizeSVG = async ({ path }) => {
+    let handle = await fs.open(path, "r");
 
-//     let svg = await handle.readFile({ encoding: 'utf-8' });
-//     console.log(svg);
-//     svg.replace(/height\=\"[0-9]*\.[0.9]*pt\"/g, `height="64px"`);
-//     svg.replace(/width\=\"[0-9]*\.[0.9]*pt\"/g, `width="64px"`);
+    let svg = await handle.readFile({ encoding: 'utf-8' });
+    svg = svg.replace(/height\=\"[0-9]*\.[0-9]*pt\"/g, `height="64px"`);
+    svg = svg.replace(/width\=\"[0-9]*\.[0-9]*pt\"/g, `width="64px"`);
 
-//     await handle.writeFile(svg);
-// };
+    await handle.close();
 
-// await asyncPoolProgress(CPUS, croppedSvgs, resizeSVG, (progress, len) => {
-//     spinner.text = `Resizing SVGs (${progress}/${len})`;
-// })
+    handle = await fs.open(path, "w");
+    await handle.writeFile(svg);
+    await handle.close();
+};
 
-// spinner.succeed(`Resized SVGs`);
+await asyncPoolProgress(CPUS, croppedSvgs, resizeSVG, (progress, len) => {
+    spinner.text = `Resizing SVGs (${progress}/${len})`;
+})
+
+spinner.succeed(`Resized SVGs`);
 
 /*
 
@@ -238,17 +242,26 @@ const minimizeSVG = async ({ symbol, path }) => {
     const result = svgo.optimize(svg, {
         path,
         multipass: true,
-        plugins: svgo.extendDefaultPlugins([{
-            name: "dereferenceUses",
-            options: {
-                symbolContainer: 'g'
-            }
-        }])
+        plugins: svgo.extendDefaultPlugins([
+            {
+                name: "dereferenceUses",
+                params: {
+                    symbolContainer: 'svg'
+                }
+            },
+            applyTranslations
+        ])
     });
 
     await handle.close();
 
     handle = await fs.open(path, "w");
+
+    if (result.error) {
+        spinner.fail(`Failed to minimize ${symbol.symbol}: ${result.error}`);
+        return;
+    }
+
     await handle.writeFile(result.data);
     await handle.close();
 
