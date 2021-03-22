@@ -5,7 +5,19 @@
     <RootNamespace>TeX_Match.Core</RootNamespace>
   </PropertyGroup>
 
-   <ItemGroup>
-    <Folder Include="Models\" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\submodules\detexify-rust\target\release\detexify.dll" Link="detexify.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
