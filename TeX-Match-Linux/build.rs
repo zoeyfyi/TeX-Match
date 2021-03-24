@@ -50,6 +50,40 @@ fn main() {
     })
     .unwrap();
 
+    let mut icons = {
+        let mut p = resources.clone();
+        p.push("icons/scalable");
+        p
+    };
+
+    fs_extra::dir::copy("../symbols", &icons, &{
+        let mut options = fs_extra::dir::CopyOptions::new();
+        options.copy_inside = true;
+        options.overwrite = true;
+        options
+    })
+    .unwrap();
+
+    let symbols = {
+        let mut p = icons.clone();
+        p.push("symbols");
+        p
+    };
+
+    icons.push("actions");
+
+    fs::rename(symbols, &icons).unwrap();
+
+    for icon in fs::read_dir(&icons)
+        .unwrap()
+        .collect::<Vec<io::Result<fs::DirEntry>>>()
+        .into_iter()
+    {
+        let icon_path = icon.unwrap().path();
+        let postfixed = icon_path.to_str().unwrap().replace(".svg", "-symbolic.svg");
+        fs::rename(icon_path, postfixed).unwrap();
+    }
+
     let mut xml = String::with_capacity(XML_HEADER.len() + XML_FOOTER.len() + 1024);
 
     xml.push_str(XML_HEADER);
