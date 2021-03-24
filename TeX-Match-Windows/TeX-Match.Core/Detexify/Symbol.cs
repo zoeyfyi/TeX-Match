@@ -14,16 +14,16 @@ public class Symbol
         Ptr = symbol;
     }
 
-    internal unsafe Symbol(uint i) : this(Bindings.symbols_get(i)) { }
+    internal unsafe Symbol(uint i) : this(Bindings.SymbolsGet(i)) { }
 
     static uint Count()
     {
-        unsafe { return Bindings.symbols_count(); }
+        unsafe { return Bindings.SymbolsCount(); }
     }
 
     ~Symbol()
     {
-        unsafe { Bindings.symbol_free(Ptr); }
+        unsafe { Bindings.SymbolFree(Ptr); }
     }
   
     public static IEnumerable All()
@@ -37,7 +37,7 @@ public class Symbol
     public string Command {
         get {
             StringBuilder builder = new StringBuilder((int)MAX_STRING_BYTES);
-            unsafe { Bindings.symbol_get_command(Ptr, builder, MAX_STRING_BYTES); }
+            unsafe { Bindings.SymbolGetCommand(Ptr, builder, MAX_STRING_BYTES); }
             return builder.ToString();
         }
     }
@@ -45,7 +45,7 @@ public class Symbol
     public string Package {
         get {
             StringBuilder builder = new StringBuilder((int)MAX_STRING_BYTES);
-            unsafe { Bindings.symbol_get_package(Ptr, builder, MAX_STRING_BYTES); }
+            unsafe { Bindings.SymbolGetPackage(Ptr, builder, MAX_STRING_BYTES); }
             return builder.ToString();
         }
     }
@@ -53,20 +53,20 @@ public class Symbol
     public string FontEncoding {
         get {
             StringBuilder builder = new StringBuilder((int)MAX_STRING_BYTES);
-            unsafe { Bindings.symbol_get_font_encoding(Ptr, builder, MAX_STRING_BYTES); }
+            unsafe { Bindings.SymbolGetFontEncoding(Ptr, builder, MAX_STRING_BYTES); }
             return builder.ToString();
         }
     }
 
     public bool TextMode {
         get {
-            unsafe { return Bindings.symbol_get_text_mode(Ptr); }
+            unsafe { return Bindings.SymbolGetTextMode(Ptr); }
         }
     }
 
     public bool MathMode {
         get {
-            unsafe { return Bindings.symbol_get_math_mode(Ptr); }
+            unsafe { return Bindings.SymbolGetMathMode(Ptr); }
         }
     }
 }

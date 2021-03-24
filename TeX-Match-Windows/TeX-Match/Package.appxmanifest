@@ -10,7 +10,7 @@
   <Identity
     Name="8269zoeyfyi.TeXMatch"
     Publisher="CN=5CEF98F0-7095-4311-A659-715CEEC964C4"
-    Version="1.3.1.0" />
+    Version="1.3.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="bec39963-57c3-4205-9a40-d11ca7e98365" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

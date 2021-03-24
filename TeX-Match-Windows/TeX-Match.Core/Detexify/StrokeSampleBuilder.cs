@@ -8,17 +8,17 @@ public class StrokeSampleBuilder
     {
         unsafe
         {
-            builder = Bindings.stroke_sample_builder_new(capacity);
+            builder = Bindings.StrokeSampleBuilderNew(capacity);
         }
     }
 
     public void AddStroke(Stroke stroke)
     {
-        unsafe { Bindings.stroke_sample_builder_add_stroke(builder, stroke.Ptr); }
+        unsafe { Bindings.StrokeSampleBuilderAddStroke(builder, stroke.Ptr); }
     }
 
     public StrokeSample build()
     {
-        unsafe { return new StrokeSample(Bindings.stroke_sample_builder_build(builder)); }
+        unsafe { return new StrokeSample(Bindings.StrokeSampleBuilderBuild(builder)); }
     }
 }

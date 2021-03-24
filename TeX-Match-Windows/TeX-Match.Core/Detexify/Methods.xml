@@ -1,0 +1,85 @@
+﻿<Methods>
+  <!-- Classifier -->
+  <Method name="classifier_free" importName="ClassifierFree" type="void">
+    <Param name="classifier" type="void*" />
+  </Method>
+  <Method name="classifier_new_default" importName="ClassifierNewDefault" type="void*" />
+  <Method name="classify" importName="Classify" type="void*">
+    <Param name="classifier" type="void*"/>
+    <Param name="sample" type="void*" />
+  </Method>
+  
+  <!-- Scores -->
+  <Method name="scores_free" importName="ScoresFree" type="void">
+    <Param name="id" type="string" />
+  </Method>
+  <Method name="scores_get_score" importName="ScoresGetScore" type="double">
+    <Param name="scores" type="void*" />
+    <Param name="i" type="uint" />
+  </Method>
+  <Method name="scores_get_symbol" importName="ScoresGetSymbol" type="void*">
+    <Param name="scores" type="void*" />
+    <Param name="i" type="uint" />
+  </Method>
+  <Method name="scores_length" importName="ScoresLength" type="uint" >
+    <Param name="scores" type="void*" />
+  </Method>
+  
+  <!-- Stroke builder -->
+  <Method name="stroke_builder_new" importName="StrokeBuilderNew" type="void*">
+    <Param name="capacity" type="uint" />
+  </Method>
+  <Method name="stroke_builder_add_point" importName="StrokeBuilderAddPoint" type="void">
+    <Param name="builder" type="void*" />
+    <Param name="x" type="double" />
+    <Param name="y" type="double" />
+  </Method>
+  <Method name="stroke_builder_build" importName="StrokeBuilderBuild" type="void*">
+    <Param name="builder" type="void*" />
+  </Method>
+  
+  <!-- Stroke sample -->
+  <Method name="stroke_sample_builder_new" importName="StrokeSampleBuilderNew" type="void*">
+    <Param name="capacity" type="uint" />
+  </Method>
+  <Method name="stroke_sample_builder_add_stroke" importName="StrokeSampleBuilderAddStroke" type="void" >
+    <Param name="builder" type="void*" />
+    <Param name="stroke" type="void*" />
+  </Method>
+  <Method name="stroke_sample_builder_build" importName="StrokeSampleBuilderBuild" type="void*">
+    <Param name="builder" type="void*" />
+  </Method>
+  
+  <!-- Symbols -->
+  <Method name="symbols_count" importName="SymbolsCount" type="uint" />
+  <Method name="symbols_get" importName="SymbolsGet" type="void*">
+    <Param name="i" type="uint" />
+  </Method>
+  
+  <!-- Symbol -->
+  <Method name="symbol_get_command" importName="SymbolGetCommand" type="void">
+    <Param name="symbol" type="void*" />
+    <Param name="buffer" type="StringBuilder" />
+    <Param name="len" type="uint" />
+  </Method>
+  <Method name="symbol_get_font_encoding" importName="SymbolGetFontEncoding" type="void">
+    <Param name="symbol" type="void*" />
+    <Param name="buffer" type="StringBuilder" />
+    <Param name="len" type="uint" />
+  </Method>
+  <Method name="symbol_get_math_mode" importName="SymbolGetMathMode" type="bool">
+    <Param name="symbol" type="void*" />
+  </Method>
+  <Method name="symbol_get_text_mode" importName="SymbolGetTextMode" type="bool">
+    <Param name="symbol" type="void*" />
+  </Method>
+  <Method name="symbol_get_package" importName="SymbolGetPackage" type="void">
+    <Param name="symbol" type="void*" />
+    <Param name="buffer" type="StringBuilder" />
+    <Param name="len" type="uint" />
+  </Method>
+  <Method name="symbol_free" importName="SymbolFree" type="void">
+    <Param name="symbol" type="void*" />
+  </Method>
+  
+</Methods>

@@ -20,8 +20,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\submodules\detexify-rust\target\release\detexify.dll" Link="detexify.dll">
+    <None Include="..\..\submodules\detexify-rust\target\i686-pc-windows-msvc\release\detexify.dll" Link="dll\x86\detexify.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="dll\x86\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Detexify\Bindings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Bindings.cs</LastGenOutput>
+    </None>
+    <None Update="dll\x64\detexify.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Detexify\Bindings.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Bindings.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

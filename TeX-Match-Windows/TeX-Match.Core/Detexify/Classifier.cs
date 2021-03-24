@@ -6,17 +6,17 @@
 
         public Classifier()
         {
-            unsafe { classifier = Bindings.classifier_new_default(); }
+            unsafe { classifier = Bindings.ClassifierNewDefault(); }
         }
 
         ~Classifier()
         {
-            unsafe { Bindings.classifier_free(classifier); }
+            unsafe { Bindings.ClassifierFree(classifier); }
         }
 
         public Scores classify(StrokeSample sample)
         {
-            unsafe { return new Scores(Bindings.classify(classifier, sample.Ptr)); }
+            unsafe { return new Scores(Bindings.Classify(classifier, sample.Ptr)); }
         }
     }
 }

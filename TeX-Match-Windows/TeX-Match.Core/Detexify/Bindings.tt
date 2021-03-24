@@ -1,0 +1,69 @@
+﻿<#@ template language="C#" hostspecific="True" #>
+
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace TeX_Match.Core.Detexify
+{
+    unsafe class Bindings
+    {
+
+    <#@ import namespace="System.Collections.Generic" #>
+    <#@ assembly name="System.Xml"#>
+    <#@ import namespace="System.Xml" #>
+    <#
+        XmlDocument doc = new XmlDocument();
+        doc.Load(this.Host.ResolvePath("Methods.xml"));
+
+        foreach(XmlNode node in doc.SelectNodes("Methods/Method"))
+        {
+            string name = node.Attributes["name"].Value;
+            string importName = node.Attributes["importName"].Value;
+            string type = node.Attributes["type"].Value;
+            bool isVoid = type == "void";
+
+            string types = "";
+            string values = "";
+            foreach(XmlNode paramNode in node.ChildNodes) 
+            {
+                types += paramNode.Attributes["type"].Value;
+                types += " ";
+                types += paramNode.Attributes["name"].Value;
+                types += ", ";
+
+                values += paramNode.Attributes["name"].Value;
+                values += ", ";
+            }
+
+            if (node.ChildNodes.Count != 0) {
+                types = types.Substring(0, types.Length - 2);
+                values = values.Substring(0, values.Length - 2);
+            }
+    #>
+        
+        /*
+         * <#= importName #>
+         */
+
+        [DllImport(@"dll/x86/detexify.dll", EntryPoint = "<#= name #>")]
+        private static extern <#= type #> <#= importName #>86(<#= types #>);
+        [DllImport(@"dll/x64/detexify.dll", EntryPoint = "<#= name #>")]
+        private static extern <#= type #> <#= importName #>64(<#= types #>);
+        internal static <#= type #> <#= importName #>(<#= types #>)
+        {
+            if (Environment.Is64BitProcess)
+            {
+                <# if (!isVoid) Write("return "); #><#= importName #>64(<#= values #>);
+            }
+            else
+            {
+                <# if (!isVoid) Write("return "); #><#= importName #>86(<#= values #>);
+            }
+        }
+
+    <#
+        }
+    #>
+}
+}

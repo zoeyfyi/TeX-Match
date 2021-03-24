@@ -13,17 +13,17 @@ namespace TeX_Match.Core.Detexify
 
         public uint Length()
         {
-            unsafe { return Bindings.scores_length(Ptr); };
+            unsafe { return Bindings.ScoresLength(Ptr); };
         }
 
         public Symbol GetSymbol(uint i)
         {
-            unsafe { return new Symbol(Bindings.scores_get_symbol(Ptr, i)); }
+            unsafe { return new Symbol(Bindings.ScoresGetSymbol(Ptr, i)); }
         }
 
         public double GetScore(uint i)
         {
-            unsafe { return Bindings.scores_get_score(Ptr, i); }
+            unsafe { return Bindings.ScoresGetScore(Ptr, i); }
         }
 
         public IEnumerator GetEnumerator()

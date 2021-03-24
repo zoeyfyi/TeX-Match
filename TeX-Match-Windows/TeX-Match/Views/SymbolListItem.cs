@@ -45,7 +45,19 @@ namespace TeX_Match.Views
                 }
             }
         }
-        public string Package => string.Format("\\usepackage{{ {0} }}", package);
+        public string Package {
+            get {
+                if (package == "latex2e")
+                {
+                    return "";
+                }
+                else
+                {
+                    return string.Format("\\usepackage{{ {0} }}", package);
+                }
+            }
+        }
+
         public double Score => score;
         public string ModeAndScore {
             get {

@@ -10,6 +10,8 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml;
 using Windows.System;
 using Windows.UI.Core;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace TeX_Match.Views
 {

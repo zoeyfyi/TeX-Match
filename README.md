@@ -97,15 +97,9 @@ cargo build
 #### Windows
 
 ```powershell
-git clone https://github.com/wingtk/gvsbuild.git C:\gtk-build\github\gvsbuild
-cd C:\gtk-build\github\gvsbuild; python .\build.py build -p=x64 --vs-ver=16 --msys-dir=C:\msys64 -k --enable-gi --py-wheel --py-egg gtk3 gdk-pixbuf
-cargo build
-```
-
-#### Windows Installer
-
-```powershell
-# follow build steps above, then:
-cargo install cargo-wix 
-cargo wix -v
+cd submodules/detexify-rust
+cargo build --release --target=x86_64-pc-windows-msvc
+cargo build --release --target=i686-pc-windows-msvc
+cd TeX-Match-Windows
+MSBuild /restore .\TeX-Match\TeX-Match.sln
 ```
