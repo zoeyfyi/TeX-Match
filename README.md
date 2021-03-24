@@ -98,8 +98,8 @@ cargo build
 
 ```powershell
 cd submodules/detexify-rust
-cargo build --release --target=x86_64-pc-windows-msvc
-cargo build --release --target=i686-pc-windows-msvc
+cargo build --release -Z build-std=std,panic_abort --target i686-uwp-windows-msvc
+cargo build --release -Z build-std=std,panic_abort --target x86_64-uwp-windows-msvc
 cd TeX-Match-Windows
 MSBuild /restore .\TeX-Match\TeX-Match.sln
 ```

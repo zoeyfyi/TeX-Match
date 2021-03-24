@@ -20,21 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\submodules\detexify-rust\target\i686-pc-windows-msvc\release\detexify.dll" Link="dll\x86\detexify.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="dll\x86\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Detexify\Bindings.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Bindings.cs</LastGenOutput>
     </None>
-    <None Update="dll\x64\detexify.dll">
+    <None Update="dll\x86\detexify.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -49,5 +39,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Bindings.tt</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="dll\x86\" />
+    <Folder Include="dll\x64\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\submodules\detexify-rust\target\i686-uwp-windows-msvc\release\detexify.dll" Link="dll\x86\detexify.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\submodules\detexify-rust\target\x86_64-uwp-windows-msvc\release\detexify.dll" Link="dll\x64\detexify.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
