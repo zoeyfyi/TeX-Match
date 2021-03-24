@@ -21,7 +21,7 @@ jobs:
     - name: Install rust
       uses: hecrj/setup-rust-action@v1
       with:
-        components: clippy, rustfmt
+        components: clippy, rustfmt, rust-src
         rust-version: nightly
     - name: Compile detextify (i686-uwp-windows-msvc)
       run: cargo build --release -Z build-std=std,panic_abort --target i686-uwp-windows-msvc
