@@ -10,8 +10,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "base32-encode": "^1.1.1",
     "ora": "^5.4.0",
     "svgo": "github:zoeyfyi/svgo#dereferenceUses-plugin-fix",
+    "tiny-async-pool": "^1.2.0",
     "tmp-promise": "^3.0.2",
     "yaml": "^1.10.2"
   }

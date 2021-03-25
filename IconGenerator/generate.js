@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import YAML from 'yaml'
 import ora from 'ora';
-import base32 from 'base32';
+import base32Encode from 'base32-encode';
 import tmp from 'tmp-promise';
 import { promisify } from 'util';
 import { exec } from 'child_process';
@@ -21,7 +21,9 @@ Utils
 */
 
 function symbolId(symbol) {
-    return base32.encode(`${symbol.package}-${symbol.fontenc}-${symbol.symbol.replace("\\", "_")}`)
+    let id = `${symbol.package}-${symbol.fontenc}-${symbol.symbol.replace("\\", "_")}`;
+    let buffer = new TextEncoder().encode(id);
+    return base32Encode(buffer, 'RFC4648', { padding: false });
 }
 
 function asyncPoolProgress(poolLimit, array, iteratorFn, tickCallback) {
