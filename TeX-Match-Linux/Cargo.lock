@@ -128,7 +128,9 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "detexify"
-version = "0.3.0"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6683200167ea30e6816fd8ef89619b9605823f3bd9c8552a7d856ee7a908c3e1"
 dependencies = [
  "base32",
  "base64 0.12.3",
