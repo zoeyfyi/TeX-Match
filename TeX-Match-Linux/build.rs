@@ -1,5 +1,9 @@
 use io::Write;
-use std::{env, fs, io, path::Path, process::Command};
+use std::{
+    env, fs, io,
+    path::{Path, PathBuf},
+    process::Command,
+};
 
 const XML_HEADER: &str = r#"<?xml version="1.0" encoding="UTF-8"?>
 <gresources>
@@ -10,8 +14,8 @@ const XML_FOOTER: &str = r#"    </gresource>
 </gresources>
 "#;
 
-fn add_files(xml: &mut String, folder: &str) {
-    for path in fs::read_dir(folder).unwrap() {
+fn add_files(xml: &mut String, root_folder: PathBuf, folder: PathBuf) {
+    for path in fs::read_dir(&folder).unwrap() {
         let path = path.as_ref().unwrap();
 
         // skip temporary files
@@ -26,10 +30,15 @@ fn add_files(xml: &mut String, folder: &str) {
                     .display()
                     .to_string()
                     .replace("\\", "/")
-                    .trim_start_matches("resources/")
+                    .trim_start_matches(&{
+                        let mut s = root_folder.display().to_string();
+                        println!("{}", s);
+                        s.push('/');
+                        s
+                    })
             ));
         } else if path.path().is_dir() {
-            add_files(xml, &path.path().display().to_string());
+            add_files(xml, root_folder.clone(), path.path());
         } else {
             panic!("expected file or folder");
         }
@@ -72,6 +81,7 @@ fn main() {
 
     icons.push("actions");
 
+    fs::remove_dir_all(&icons).ok();
     fs::rename(symbols, &icons).unwrap();
 
     for icon in fs::read_dir(&icons)
@@ -87,7 +97,7 @@ fn main() {
     let mut xml = String::with_capacity(XML_HEADER.len() + XML_FOOTER.len() + 1024);
 
     xml.push_str(XML_HEADER);
-    add_files(&mut xml, "resources");
+    add_files(&mut xml, resources.clone(), resources.clone());
     xml.push_str(XML_FOOTER);
 
     let resource_xml = {
