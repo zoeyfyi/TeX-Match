@@ -23,7 +23,7 @@ namespace TeX_Match.Core.Helpers
 {
     public static class Base32
     {
-        private static readonly char[] _digits = "0123456789abcdefghjkmnpqrtuvwxyz".ToCharArray();
+        private static readonly char[] _digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".ToCharArray();
         private const int _mask = 31;
         private const int _shift = 5;
 
