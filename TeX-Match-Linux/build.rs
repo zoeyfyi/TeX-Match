@@ -47,6 +47,8 @@ fn add_files(xml: &mut String, root_folder: PathBuf, folder: PathBuf) {
 
 fn main() {
     let out_dir = env::var("OUT_DIR").unwrap();
+    let manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+
     let mut resources = Path::new(&out_dir).to_path_buf();
     resources.push("resources");
 
@@ -65,7 +67,7 @@ fn main() {
         p
     };
 
-    fs_extra::dir::copy("../symbols", &icons, &{
+    fs_extra::dir::copy(format!("{}/../symbols", manifest_dir), &icons, &{
         let mut options = fs_extra::dir::CopyOptions::new();
         options.copy_inside = true;
         options.overwrite = true;
