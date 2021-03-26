@@ -25,7 +25,7 @@
             "name": "tex-match",
             "buildsystem": "simple",
             "build-commands": [
-                "cargo --offline build --release",
+                "cargo --manifest-path TeX-Match-Linux/Cargo.toml --offline build --release",
                 "install -Dm755 ./target/release/tex-match -t /app/bin/",
                 "install -Dm644 ./data/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/",
                 "install -Dm644 ./data/${FLATPAK_ID}.desktop -t /app/share/applications/",
@@ -35,7 +35,7 @@
             "sources": [
                 {
                     "type": "dir",
-                    "path": "../"
+                    "path": "../../"
                 },
                 "generated-sources.json"
             ]
