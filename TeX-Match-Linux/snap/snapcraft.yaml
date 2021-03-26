@@ -12,9 +12,12 @@ build-packages:
 parts:
   tex-match:
     plugin: rust
-    source: .
+    source: ../
     parse-info:
       - data/fyi.zoey.TeX-Match.metainfo.xml
+    override-build: |
+      cd TeX-Match-Linux
+      snapcraftctl build
 
 slots:
   dbus-daemon:
