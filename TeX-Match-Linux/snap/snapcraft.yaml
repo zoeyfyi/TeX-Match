@@ -15,9 +15,8 @@ parts:
     source: ../
     parse-info:
       - data/fyi.zoey.TeX-Match.metainfo.xml
-    override-build: |
-      cd TeX-Match-Linux
-      snapcraftctl build
+    rust-path:
+      - TeX-Match-Linux
 
 slots:
   dbus-daemon:
