@@ -2,7 +2,7 @@ name: tex-match
 icon: snap/gui/tex-match.svg
 adopt-info: tex-match
 
-base: core18
+base: core20
 confinement: strict
 
 build-packages:
