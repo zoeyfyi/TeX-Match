@@ -35,7 +35,7 @@ shrinkwraprs = "0.3.0"
 log = "0.4.14"
 env_logger = "0.8.2"
 # TeX classification
-detexify = "0.3.0"
+detexify = "0.4.0"
 # Misc utils
 dirty2 = "0.1.0"
 simple-error = "0.2"
