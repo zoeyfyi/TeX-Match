@@ -23,16 +23,13 @@ jobs:
       with:
         components: clippy, rustfmt, rust-src
         rust-version: nightly
-    - name: Compile detextify (i686-uwp-windows-msvc)
-      run: cargo build --package detexify-c --release -Z build-std=std,panic_abort --target i686-uwp-windows-msvc
-      working-directory: ./submodules/detexify-rust
-    - name: Compile detextify (x86_64-uwp-windows-msvc)
+    - name: Compile detextify (x86_64-uwp-windows-msvc) # dont bother testing 32-bit windows, it will be fine...
       run: cargo build --package detexify-c --release -Z build-std=std,panic_abort --target x86_64-uwp-windows-msvc
       working-directory: ./submodules/detexify-rust
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
     - name: Build solution
-      run: MSBuild TeX-Match/TeX-Match.sln /restore /t:Build /p:Configuration=Release
+      run: MSBuild TeX-Match/TeX-Match.sln /restore /t:Build /p:Configuration=Release|x64
       working-directory: ./TeX-Match-Windows
 
   linux:
