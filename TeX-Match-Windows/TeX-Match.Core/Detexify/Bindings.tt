@@ -46,21 +46,8 @@ namespace TeX_Match.Core.Detexify
          * <#= importName #>
          */
 
-        [DllImport(@"dll/x86/detexify.dll", EntryPoint = "<#= name #>")]
-        private static extern <#= type #> <#= importName #>86(<#= types #>);
-        [DllImport(@"dll/x64/detexify.dll", EntryPoint = "<#= name #>")]
-        private static extern <#= type #> <#= importName #>64(<#= types #>);
-        internal static <#= type #> <#= importName #>(<#= types #>)
-        {
-            if (Environment.Is64BitProcess)
-            {
-                <# if (!isVoid) Write("return "); #><#= importName #>64(<#= values #>);
-            }
-            else
-            {
-                <# if (!isVoid) Write("return "); #><#= importName #>86(<#= values #>);
-            }
-        }
+        [DllImport(@"detexify.dll", EntryPoint = "<#= name #>")]
+        internal static extern <#= type #> <#= importName #>(<#= types #>);
 
     <#
         }
