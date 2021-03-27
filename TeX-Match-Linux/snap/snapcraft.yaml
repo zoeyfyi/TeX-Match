@@ -27,7 +27,7 @@ slots:
 apps:
   tex-match:
     command: bin/tex-match
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
     plugs:
       - desktop
       - desktop-legacy
