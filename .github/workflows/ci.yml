@@ -82,7 +82,6 @@ jobs:
       - uses: snapcore/action-build@v1
         with:
           path: ./TeX-Match-Linux
-          snapcraft-args: --enable-experimental-extensions
 
   flatpak:
     runs-on: ubuntu-latest
