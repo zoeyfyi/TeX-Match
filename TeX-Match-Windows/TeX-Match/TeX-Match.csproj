@@ -4646,6 +4646,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="nuget.config" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
