@@ -33,7 +33,7 @@ gladis_proc_macro = "0.4.1"
 shrinkwraprs = "0.3.0"
 # Logging
 log = "0.4.14"
-env_logger = "0.8.2"
+env_logger = "0.8.3"
 # TeX classification
 detexify = "0.4.0"
 # Misc utils
@@ -41,7 +41,7 @@ dirty2 = "0.1.0"
 simple-error = "0.2"
 itertools = "0.10.0"
 base64 = "0.13.0"
-single_value_channel = "1.2.1"
+single_value_channel = "1.2.2"
 
 [dependencies.gtk]
 version = "0.9"
