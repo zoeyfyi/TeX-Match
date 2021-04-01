@@ -12,9 +12,9 @@ build-packages:
 parts:
   tex-match:
     plugin: rust
-    source: ../
+    source: .
     parse-info:
-      - data/fyi.zoey.TeX-Match.metainfo.xml
+      - TeX-Match-Linux/data/fyi.zoey.TeX-Match.metainfo.xml
     rust-path:
       - TeX-Match-Linux
 

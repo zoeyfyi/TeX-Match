@@ -32,7 +32,6 @@ fn add_files(xml: &mut String, root_folder: PathBuf, folder: PathBuf) {
                     .replace("\\", "/")
                     .trim_start_matches(&{
                         let mut s = root_folder.display().to_string();
-                        println!("{}", s);
                         s.push('/');
                         s
                     })
