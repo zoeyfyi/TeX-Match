@@ -3,7 +3,7 @@
 </p>
 
 <div align="center">
-  <img width="128px" src="data/fyi.zoey.TeX-Match.svg" >
+  <img width="128px" src="TeX-Match-Linux/data/fyi.zoey.TeX-Match.svg" >
 </div>
 
 <h1 align="center">TeX Match</h1>
@@ -45,14 +45,16 @@ If you work with LaTeX, you know its difficult to memorize the names of all the 
 | | AUR | [`tex-match`](https://aur.archlinux.org/packages/tex-match/) </br> [`tex-match-bin`](https://aur.archlinux.org/packages/tex-match-bin/)  |
 | | Snap Store | [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/tex-match) | 
 | | Flathub | [<img width='190' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'>](https://flathub.org/apps/details/fyi.zoey.TeX-Match) | 
-| Windows | Installer | [tex-match.windows.msi](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.windows.msi) | 
-| MacOS | Binary | You should really use the [detexify Mac app](https://gum.co/detexify), but if you _really__ want to: [tex-match.macos](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.macos) |
+| Windows | Microsoft Store | [<img width='190' src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge'/>](https://www.microsoft.com/store/apps/9nmkbc3rsks6?cid=storebadge&ocid=badge) | 
+| MacOS | Binary | You should really use the [detexify Mac app](https://gum.co/detexify), but if you _really_ want to: [tex-match.macos](https://github.com/zoeyfyi/TeX-Match/releases/latest/download/tex-match.macos) |
 
 ### Screenshots
 
-| Adwaita | Adwaita-Dark |
+| Linux (Adwaita) | Linux (Adwaita-Dark) |
 | :---: | :---: |
-| ![light](screenshots/light.png) | ![dark](screenshots/dark.png) |
+| ![Adwaita theme screenshot](screenshots/light.png) | ![Adwaita-Dark theme screenshot](screenshots/dark.png) |
+| __Windows__ |  |
+| ![](screenshots/windows.jpg) | |
 
 
 ### Building
@@ -97,15 +99,9 @@ cargo build
 #### Windows
 
 ```powershell
-git clone https://github.com/wingtk/gvsbuild.git C:\gtk-build\github\gvsbuild
-cd C:\gtk-build\github\gvsbuild; python .\build.py build -p=x64 --vs-ver=16 --msys-dir=C:\msys64 -k --enable-gi --py-wheel --py-egg gtk3 gdk-pixbuf
-cargo build
-```
-
-#### Windows Installer
-
-```powershell
-# follow build steps above, then:
-cargo install cargo-wix 
-cargo wix -v
+cd submodules/detexify-rust
+cargo build --release -Z build-std=std,panic_abort --target i686-uwp-windows-msvc
+cargo build --release -Z build-std=std,panic_abort --target x86_64-uwp-windows-msvc
+cd TeX-Match-Windows
+MSBuild /restore .\TeX-Match\TeX-Match.sln
 ```

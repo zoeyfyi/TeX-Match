@@ -1,0 +1,44 @@
+{
+    "app-id": "fyi.zoey.TeX-Match",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "20.08",
+    "sdk": "org.freedesktop.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command": "tex-match",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "env": {
+            "_RUSTFLAGS": "--remap-path-prefix =../",
+            "CARGO_HOME": "/run/build/tex-match/cargo"
+        }
+    },
+    "modules": [
+        {
+            "name": "tex-match",
+            "buildsystem": "simple",
+            "build-commands": [
+                "cargo --offline build --manifest-path TeX-Match-Linux/Cargo.toml --release",
+                "install -Dm755 ./TeX-Match-Linux/target/release/tex-match -t /app/bin/",
+                "install -Dm644 ./TeX-Match-Linux/data/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo/",
+                "install -Dm644 ./TeX-Match-Linux/data/${FLATPAK_ID}.desktop -t /app/share/applications/",
+                "install -Dm644 ./TeX-Match-Linux/data/${FLATPAK_ID}.svg -t /app/share/icons/hicolor/scalable/apps/",
+                "install -Dm644 ./TeX-Match-Linux/data/${FLATPAK_ID}-symbolic.svg -t /app/share/icons/hicolor/symbolic/apps/"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "../../"
+                },
+                "generated-sources.json"
+            ]
+        }
+    ]
+}

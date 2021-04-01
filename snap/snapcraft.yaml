@@ -2,7 +2,7 @@ name: tex-match
 icon: snap/gui/tex-match.svg
 adopt-info: tex-match
 
-base: core18
+base: core20
 confinement: strict
 
 build-packages:
@@ -14,7 +14,9 @@ parts:
     plugin: rust
     source: .
     parse-info:
-      - data/fyi.zoey.TeX-Match.metainfo.xml
+      - TeX-Match-Linux/data/fyi.zoey.TeX-Match.metainfo.xml
+    rust-path:
+      - TeX-Match-Linux
 
 slots:
   dbus-daemon:
@@ -25,7 +27,7 @@ slots:
 apps:
   tex-match:
     command: bin/tex-match
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
     plugs:
       - desktop
       - desktop-legacy

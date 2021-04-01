@@ -77,13 +77,10 @@ for (symbol, package, fontenc, textmode, mathmode) in parsed_symbols:
     os.system("sed -i 's/width\=\\\"[0-9]*.[0-9]*pt\\\"/width=\\\"64px\\\"/g' temp2.svg")
 
     id = package + "-" + fontenc + "-" + symbol.replace("\\", "_")
-    id = base64.b64encode(id.encode("utf-8"))
+    id = base64.b32encode(id.encode("utf-8"))
     id = str(id, "utf-8")
     
-    os.system("mv temp2.svg resources/icons/scalable/actions/{}-symbolic.svg".format(id))
+    os.system("mv temp2.svg symbols/{}".format(id))
     
-
-
-
 # cleanup files
 os.system("rm temp.*")

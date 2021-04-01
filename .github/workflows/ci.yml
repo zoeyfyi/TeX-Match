@@ -10,25 +10,34 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  ci:
-    name: ${{ matrix.config.os }}
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-        - os: macOS-latest
-          pkgconfig: pkg-config
-          pkgconfigpath: /usr/lib/pkgconfig
-          glibcrpath: glib-compile-resources
-        - os: ubuntu-latest
-          pkgconfig: pkg-config
-          pkgconfigpath: /usr/lib/pkgconfig
-          glibcrpath: glib-compile-resources
-        - os: windows-2019
-          pkgconfig: C:\msys64\mingw64\bin\pkg-config.exe
-          pkgconfigpath: C:\gtk-build\gtk\x64\release\lib\pkgconfig
-          glibcrpath: C:\gtk-build\gtk\x64\release\bin\glib-compile-resources.exe
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Install rust
+      uses: hecrj/setup-rust-action@v1
+      with:
+        components: clippy, rustfmt, rust-src
+        rust-version: nightly
+    - name: Compile detextify (x86_64-uwp-windows-msvc)
+      run: cargo build --package detexify-c --release -Z build-std=std,panic_abort --target x86_64-uwp-windows-msvc
+      working-directory: ./submodules/detexify-rust
+    - name: Compile detextify (i686-uwp-windows-msvc)
+      run: cargo build --package detexify-c --release -Z build-std=std,panic_abort --target i686-uwp-windows-msvc
+      working-directory: ./submodules/detexify-rust
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Build solution
+      run: MSBuild TeX-Match/TeX-Match.sln /restore /t:Build /p:Configuration=Release /p:Platform=x64 /p:AppxPackageSigningEnabled=false
+      working-directory: ./TeX-Match-Windows
+
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -41,100 +50,63 @@ jobs:
         rust-version: 1.46.0
     - name: Cache cargo
       uses: actions/cache@v2.1.4
-      if: runner.os != 'macOS'
       with:
         path: |
           ~/.cargo/registry
           ~/.cargo/git
           target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    ################# Dependencies #################
-    # ======== Linux ========
-    - name: Linux dependencies
-      if: runner.os == 'linux'
-      run: sudo apt-get update -y && sudo apt-get install -y libgtk-3-dev
-    # ======== MacOS ========
-    - name: MacOS dependencies
-      if: runner.os == 'macOS'
-      run: brew install gtk+3 pkg-config
-    # ======== Windows ========
-    - name: Windows dependencies (update msys)
-      if: runner.os == 'windows'
-      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syu --noconfirm"
-    - name: Windows dependencies (msys remove cmake)
-      if: runner.os == 'windows'
-      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Rs --noconfirm mingw-w64-x86_64-cmake"
-    - name: Windows dependencies (msys)
-      if: runner.os == 'windows'
-      run: C:\msys64\usr\bin\bash.exe -lc "pacman -Syy --noconfirm mingw-w64-x86_64-pkg-config"
-    - name: Windows dependencies (add msys to path)
-      if: runner.os == 'windows'
-      run: echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
-    - name: Windows dependencies (cache gvsbuild)
-      if: runner.os == 'windows'
-      uses: actions/cache@v2.1.4
-      id: cache
-      with:
-        path: release\**
-        key: ${{ runner.os }}-gvsbuild--${{ hashFiles('submodules/gvsbuild/**') }}
-    - name: Windows dependencies (move gvsbuild files)
-      if: runner.os == 'windows' && steps.cache.outputs.cache-hit == 'true'
-      run: xcopy /e /i release C:\gtk-build\gtk\x64\release
-      shell: cmd
-    - name: Windows dependencies (copy gvsbuild)
-      if: runner.os == 'windows' && steps.cache.outputs.cache-hit != 'true'
-      run: xcopy /e /i submodules\gvsbuild C:\gtk-build\github\gvsbuild
-    - name: Windows dependencies (remove git)
-      if: runner.os == 'windows'
-      run: rmdir "C:\Program Files\Git\usr\bin" /s /q # remove git's bin, there are conflicting cygwin dll's
-      shell: cmd
-    - name: Windows dependencies (gtk)
-      if: runner.os == 'windows' && steps.cache.outputs.cache-hit != 'true'
-      run: python .\build.py build -p=x64 --vs-ver=16 --msys-dir=C:\msys64 -k --enable-gi --py-wheel --py-egg gtk3 gdk-pixbuf librsvg hicolor-icon-theme
-      working-directory: C:\gtk-build\github\gvsbuild
-    - name: Windows dependencies (add gvsbuild bin directory to path)
-      if: runner.os == 'windows'
-      run: echo "C:\gtk-build\gtk\x64\release\bin" >> $GITHUB_PATH
-    ################# Dependencies #################
-    - run: ls ${{ matrix.config.pkgconfigpath }}
+    - name: Dependencies
+      run: sudo apt-get update -y && sudo apt-get install -y libgtk-3-dev libgtksourceview-3.0-dev
     - name: Check
       run: cargo check
-      env:
-        GTK_LIB_DIR: C:\msys64\mingw64\bin
-        PKG_CONFIG_ALLOW_CROSS: 1
-        PKG_CONFIG: ${{ matrix.config.pkgconfig }}
-        PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
-        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
+      working-directory: ./TeX-Match-Linux
     - name: Test
       run: cargo test -- --nocapture
-      env:
-        GTK_LIB_DIR: C:\msys64\mingw64\bin
-        PKG_CONFIG_ALLOW_CROSS: 1
-        PKG_CONFIG: ${{ matrix.config.pkgconfig }}
-        PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
-        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
+      working-directory: ./TeX-Match-Linux
     - name: Fmt
       run: cargo fmt --all -- --check
-      env:
-        GTK_LIB_DIR: C:\msys64\mingw64\bin
-        PKG_CONFIG_ALLOW_CROSS: 1
-        PKG_CONFIG: ${{ matrix.config.pkgconfig }}
-        PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
-        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
+      working-directory: ./TeX-Match-Linux
     - name: Clippy
       run: cargo clippy -- -D warnings
-      env:
-        GTK_LIB_DIR: C:\msys64\mingw64\bin
-        PKG_CONFIG_ALLOW_CROSS: 1
-        PKG_CONFIG: ${{ matrix.config.pkgconfig }}  
-        PKG_CONFIG_PATH: ${{ matrix.config.pkgconfigpath }}
-        GLIB_COMPILE_RESOURCES: ${{ matrix.config.glibcrpath }}
-    ################# Windows workarounds #################
-    - name: Windows dependencies (make release folder)
-      run: mkdir release
-      shell: cmd
-      if: runner.os == 'windows' && steps.cache.outputs.cache-hit != 'true'
-    - name: Windows dependencies (move release files)
-      run: xcopy /e /i C:\gtk-build\gtk\x64\release %cd%\release
-      shell: cmd
-      if: runner.os == 'windows' && steps.cache.outputs.cache-hit != 'true'
+      working-directory: ./TeX-Match-Linux
+
+  snap:
+    name: snap
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+      - uses: snapcore/action-build@v1
+
+  flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/bilelmoussaoui/flatpak-github-actions
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+      - name: Dependency (Python TOML)
+        run: sudo dnf install -y python3-toml
+      - name: Generate sources
+        run: bash flatpak/gen-sources.sh
+        working-directory: ./TeX-Match-Linux
+      - uses: bilelmoussaoui/flatpak-github-actions@v2
+        with:
+          manifest-path: "TeX-Match-Linux/flatpak/fyi.zoey.TeX-Match.json"
+
+  metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Dependencies
+        run: sudo apt-get install -y appstream-util desktop-file-utils
+      - name: Validate data/fyi.zoey.TeX-Match.metainfo.xml
+        run: appstream-util validate-relax data/fyi.zoey.TeX-Match.metainfo.xml
+        working-directory: ./TeX-Match-Linux
+      - name: Validate data/fyi.zoey.TeX-Match.desktop
+        run: desktop-file-validate data/fyi.zoey.TeX-Match.desktop
+        working-directory: ./TeX-Match-Linux
