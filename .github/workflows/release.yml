@@ -34,7 +34,7 @@ jobs:
       run: cargo build --release --all-features 
     - name: rename output
       run: mv target/release/tex-match ./tex-match.linux.amd64
-    - uses: actions/upload-artifact@v2.2.2
+    - uses: actions/upload-artifact@v2.2.3
       with:
         name: tex-match.linux.amd64
         path: ./tex-match.linux.amd64
@@ -104,7 +104,7 @@ jobs:
         PKG_CONFIG_PATH: C:\gtk-build\gtk\x64\release\lib\pkgconfig
         GLIB_COMPILE_RESOURCES: C:\gtk-build\gtk\x64\release\bin\glib-compile-resources.exe
     # upload
-    - uses: actions/upload-artifact@v2.2.2
+    - uses: actions/upload-artifact@v2.2.3
       with:
         name: tex-match.windows.msi
         path: ./tex-match.windows.msi
@@ -133,7 +133,7 @@ jobs:
       run: cargo build --release --all-features 
     - name: rename output
       run: mv target/release/tex-match ./tex-match.macos
-    - uses: actions/upload-artifact@v2.2.2
+    - uses: actions/upload-artifact@v2.2.3
       with:
         name: tex-match.macos
         path: ./tex-match.macos
@@ -159,7 +159,7 @@ jobs:
         release: stable
     - name: rename output
       run: mv ${{ steps.snapcraft.outputs.snap }} ./tex-match.snap
-    - uses: actions/upload-artifact@v2.2.2
+    - uses: actions/upload-artifact@v2.2.3
       with:
         name: tex-match.snap
         path: ./tex-match.snap
@@ -181,7 +181,7 @@ jobs:
       with:
         bundle: "tex-match.flatpak"
         manifest-path: "flatpak/fyi.zoey.TeX-Match.json"
-    - uses: actions/upload-artifact@v2.2.2
+    - uses: actions/upload-artifact@v2.2.3
       with:
         name: tex-match.flatpak
         path: ./tex-match.flatpak
