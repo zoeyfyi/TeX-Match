@@ -94,7 +94,7 @@ jobs:
       - name: Generate sources
         run: bash flatpak/gen-sources.sh
         working-directory: ./TeX-Match-Linux
-      - uses: bilelmoussaoui/flatpak-github-actions@v2
+      - uses: bilelmoussaoui/flatpak-github-actions@v3
         with:
           manifest-path: "TeX-Match-Linux/flatpak/fyi.zoey.TeX-Match.json"
 
