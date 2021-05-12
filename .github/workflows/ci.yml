@@ -15,7 +15,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.4
       with:
         submodules: 'recursive'
     - name: Install rust
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.4
       with:
         submodules: 'recursive'
     - name: Install rust
@@ -75,7 +75,7 @@ jobs:
     name: snap
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
         with:
           submodules: "recursive"
       - uses: snapcore/action-build@v1
@@ -86,7 +86,7 @@ jobs:
       image: docker.io/bilelmoussaoui/flatpak-github-actions
       options: --privileged
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
         with:
           submodules: "recursive"
       - name: Dependency (Python TOML)
@@ -101,7 +101,7 @@ jobs:
   metadata:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - name: Dependencies
         run: sudo apt-get install -y appstream-util desktop-file-utils
       - name: Validate data/fyi.zoey.TeX-Match.metainfo.xml
