@@ -150,7 +150,7 @@ jobs:
         rust-version: 1.46.0
     - uses: snapcore/action-build@v1
       id: snapcraft
-    - uses: snapcore/action-publish@v1
+    - uses: snapcore/action-publish@v1.0.2
       continue-on-error: true
       if: github.event_name != 'pull_request'
       with:
