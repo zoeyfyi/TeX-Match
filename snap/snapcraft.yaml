@@ -8,6 +8,7 @@ confinement: strict
 build-packages:
   - gcc
   - libc6-dev
+  - libdbus-1-dev
 
 parts:
   tex-match:
